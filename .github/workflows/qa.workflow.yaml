@@ -10,6 +10,7 @@ jobs:
     - uses: ./.github/actions/stages/build
     
   deploy-qa:
+    needs: build # Step for needing jobs.build to be done before
     runs-on: ubuntu-latest
     steps:
     - uses: ./.github/actions/stages/deploy
