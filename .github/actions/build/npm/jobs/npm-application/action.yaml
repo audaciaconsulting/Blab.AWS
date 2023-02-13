@@ -1,8 +1,6 @@
+name: 'Build NPM'
+
 inputs:
-  display-name:
-    required: false
-    type: string
-    default: 'Build NPM'
   node-version:
     required: false
     type: string
@@ -16,8 +14,6 @@ inputs:
   projects:
     required: true
     type: string
-
-name: ${{ inputs.display-name }}
 
 runs:
   using: "composite"

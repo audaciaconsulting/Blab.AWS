@@ -1,8 +1,6 @@
+name: Build .NET'
+
 inputs:
-  display-name:
-    required: false
-    type: string
-    default: 'Build .NET'
   should-run-tests:
     required: false
     type: boolean
@@ -23,8 +21,6 @@ inputs:
     required: false
     type: string
     default: 'latest'
-
-name: ${{ inputs.display-name }}
 
 runs:
   using: "composite"

@@ -6,7 +6,6 @@ runs:
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
-        display-name: Build Blab API
         apply-versioning: true
         projects: './src/LeedsGalvanising.Api/src/LeedsGalvanising.Api/LeedsGalvanising.Api.csproj'
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
@@ -14,7 +13,6 @@ runs:
     # build identity
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
-        display-name: Build Blab Identity
         apply-versioning: true
         projects: './src/LeedsGalvanising.Api/src/LeedsGalvanising.Identity/LeedsGalvanising.Identity.csproj'
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
@@ -22,7 +20,6 @@ runs:
     # build vue app
     - uses: ./.github/actions/build/npm/jobs/npm-application
       with:
-        display-name: Build Blab SPA
         apply-versioning: true
         projects: './src/LeedsGalvanising.Ui'
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
