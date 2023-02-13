@@ -1,0 +1,37 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo ASPNETCORE_ENVIRONMENT is $ASPNETCORE_ENVIRONMENT
+      - echo Restore started on `date`
+  build:
+    commands:
+      - echo Build started on `date`
+      - dotnet restore src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj --source "https://api.nuget.org/v3/index.json;https://pkgs.dev.azure.com/audacia/Audacia.Public/_packaging/AudaciaPublic/nuget/v3/index.json"
+
+      # install openiddict seeding tool
+      - dotnet new tool-manifest --force
+      - dotnet tool install Audacia.Auth.OpenIddict.Seeding.EntityFrameworkCore --version 1.4.9 --add-source https://pkgs.dev.azure.com/audacia/Audacia.Public/_packaging/AudaciaPublic/nuget/v3/index.json
+      # run openiddict seeding
+      - echo Run OpenIddict Seeding
+      - dotnet tool run openiddict-efcore-seeding "./build_output/id" "Blab.Identity" "int" "OpenIddictDbContext"
+artifacts:
+  files:
+    - './build_output/*'
+  secondary-artifacts:
+    api:
+      base-directory: './build_output/api'
+      files:
+        - '**/*'
+      name: api
+    identity:
+      base-directory: './build_output/id'
+      files:
+        - '**/*'
+      name: identity
+    ui:
+      base-directory: './build_output/ui'
+      files:
+        - '**/*'
+      name: ui

@@ -1,0 +1,32 @@
+# Based on https://github.com/PrakashTrove/AWS-CodeBuild-NetCore/blob/master/buildspec.yml
+# AWS CodeBuild spec to run Entity Framework migrations before a deployment
+# In order to AWS CodeBuild has access to RDS, I had to manually setup a Inbound rule:
+# https://ctoasaservice.org/2019/01/23/aws-codebuild-and-access-to-rds/
+version: 0.2
+    
+phases:   
+  install:
+    runtime-versions:
+      dotnet: latest
+      dotnet: 3.1
+    commands:
+      - echo Installing Entity Framework Core tools reference - .NET CLI
+      - dotnet tool install --global dotnet-ef --version 6.0
+      
+  pre_build:
+    commands:
+      - dotnet restore src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj --source "https://api.nuget.org/v3/index.json;https://pkgs.dev.azure.com/audacia/Audacia.Public/_packaging/AudaciaPublic/nuget/v3/index.json"
+      
+      - echo ASPNETCORE_ENVIRONMENT is $ASPNETCORE_ENVIRONMENT
+      - echo $ConnectionStrings__BlabDbContext
+      - echo $ConnectionStrings__OpenIddictDbContext
+      - echo Info about dbcontext
+      
+  build:
+    commands:
+      - cd ./src/Blab.Api/src
+      - dotnet tool restore
+      - echo Update domain database on `date`
+      - dotnet ef database update --startup-project Blab.Identity --project Blab.DataAccess --context BlabDbContext --verbose
+      - echo Update openiddict database on `date`
+      - dotnet ef database update --startup-project Blab.Identity --project Blab.DataAccess --context OpenIddictDbContext --verbose

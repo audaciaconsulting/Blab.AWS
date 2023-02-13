@@ -1,0 +1,21 @@
+parameters:
+  environmentName: '' # Name of the environment
+  environmentDisplayName: '' # Display Name of the environment 
+  environmentSubscription: '' # Subscription to deploy resources to
+  azureVariableGroup: '' # Variable group for azure
+  appSettingsVariableGroup: '' # Variable group for app settings
+
+stages:
+
+  - stage: Deploy_${{ parameters.environmentDisplayName }}
+    displayName: Deploy ${{ parameters.environmentDisplayName }}
+    condition: and(succeeded(), and(not(eq(variables['Build.Reason'], 'PullRequest')), not(eq(variables['Build.Reason'], 'Schedule'))))
+
+    jobs:
+      - template: ../jobs/deploy.job.yaml
+        parameters:
+          environmentName: ${{ parameters.environmentName }}
+          environmentDisplayName: ${{ parameters.environmentDisplayName }}
+          environmentSubscription: ${{ parameters.environmentSubscription }}
+          azureVariableGroup: ${{ parameters.azureVariableGroup }}
+          appSettingsVariableGroup: ${{ parameters.appSettingsVariableGroup }}

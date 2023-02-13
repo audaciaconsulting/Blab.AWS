@@ -1,0 +1,104 @@
+:root {
+    --primary-color: #003C4D;
+    --secondary-color: #00B489;
+    --tertiary-color: #E3ABFF;
+    --background-color: #002029;
+    --sidebar-color: #002833;
+}
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: var(--background-color);
+}
+
+h1, h2, h3, p, label, button {
+    color: var(--secondary-color);
+}
+
+form {
+    background-color: var(--background-color);
+}
+
+input.login-fields {
+    border-style: none;
+    background: transparent;
+    outline: none;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+input.login-fields:focus {
+    border-style: none;
+    background: transparent;
+    outline: none;
+    border: 3px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+input.register-fields {
+    border-style: none;
+    background: transparent;
+    outline: none;
+    border: 2px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+input.register-fields:focus {
+    border-style: none;
+    background: transparent;
+    outline: none;
+    border: 3px solid var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+footer.bg-footer {
+    background: var(--primary-color);
+}
+
+.row{
+    justify-content:center;
+}
+
+.logo {
+    width: 60%;
+    display: block;
+    margin: auto;
+}
+
+a {
+    color: var(--tertiary-color);
+}
+
+ul, li {
+    color: var(--tertiary-color);
+}
+
+#login-submit {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+#navigation-bar {
+    background-color: var(--secondary-color);
+}
+
+#top-nav {
+    border-bottom: 1px  solid var(--secondary-color);
+}
+

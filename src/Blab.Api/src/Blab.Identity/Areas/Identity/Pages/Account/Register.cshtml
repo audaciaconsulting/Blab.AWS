@@ -1,0 +1,60 @@
+﻿@page
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model RegisterModel
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <img class="logo" src="~/main-logo.png" alt="Blab logo"/>
+            <div asp-validation-summary="None" class="text-danger"></div>
+            <hr />
+            <div class="form-floating">
+                <input asp-for="Input.Email" class="register-fields form-control" autocomplete="username" aria-required="true" data-test="email-input"/>
+                <label asp-for="Input.Email"></label>
+                <span asp-validation-for="Input.Email" class="text-danger" data-test="email-input-error"></span>
+            </div>
+            <br/>
+            <div class="form-floating">
+                <input asp-for="Input.Password" class="register-fields form-control" autocomplete="new-password" aria-required="true" data-test="password-input"/>
+                <label asp-for="Input.Password"></label>
+                <span asp-validation-for="Input.Password" class="text-danger"data-test="password-input-error"></span>
+            </div>
+            <br/>
+            <div class="form-floating">
+                <input asp-for="Input.ConfirmPassword" class="register-fields form-control" autocomplete="new-password" aria-required="true" data-test="password-confirm-input"/>
+                <label asp-for="Input.ConfirmPassword"></label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger" data-test="password-confirm-input-error"></span>
+            </div>
+            <br/>
+            <div class="form-floating">
+                <input asp-for="Input.Handle" class="register-fields form-control" autocomplete="new-handle" aria-required="true" data-test="handle-input"/>
+                <label asp-for="Input.Handle"></label>
+                <span asp-validation-for="Input.Handle" class="text-danger" data-test="handle-input-error"></span>
+            </div>
+            <br/>
+            <div class="form-floating">
+                <input asp-for="Input.DisplayName" class="register-fields form-control" autocomplete="new-display-name" aria-required="true" data-test="display-name-input"/>
+                <label asp-for="Input.DisplayName"></label>
+                <span asp-validation-for="Input.DisplayName" class="text-danger" data-test="display-name-input-error"></span>
+            </div>
+            <br/>
+            <div class="form-floating">
+                <input asp-for="Input.DateOfBirth" type="date" class="register-fields form-control" autocomplete="new-date-of-birth" aria-required="true" data-test="date-of-birth-input"/>
+                <label asp-for="Input.DateOfBirth"></label>
+                <span asp-validation-for="Input.DateOfBirth" class="text-danger" data-test="date-of-birth-input-error"></span>
+            </div>
+            <br/>
+
+            
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary" data-test="register-button">Register</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

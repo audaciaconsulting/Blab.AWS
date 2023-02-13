@@ -1,0 +1,79 @@
+# Job template to deploy to a specific environment
+parameters:
+  environmentSubscription: '' # Subscription to deploy resources to
+  resourceGroupName: ''
+  apiResourceName: ''
+  apiUrl: '' # The full url of the API resource, e.g. https://my-api.azurewebsites.net
+  #identityResourceName: ''
+  #identityUrl: '' # The full url of the API resource, e.g. https://my-login.azurewebsites.net
+  webResourceName: ''
+  webUrl: '' # The full URL of the UI, e.g. https://my-ui.azurewebsites.net
+  sqlConnectionString: ''
+
+steps:
+  - task: FileTransform@1
+    displayName: 'AppSettings Variable Substitution'
+    inputs:
+      folderPath: '$(Pipeline.Workspace)'
+      fileType: 'json'
+      targetFiles: '**/appsettings.json'
+
+  # TODO: UI config file transforms
+
+  - task: bendayconsulting.build-task.deployefcoremigrations.deployefcoremigrations@1
+    displayName: 'Apply EF Core migrations'
+    inputs:
+      migrationsDll: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Api/Blab.DataAccess.dll'
+      migrationsNamespace: Blab.DataAccess
+      startupDll: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Api/Blab.Api.dll'
+      depsJsonFile: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Api/Blab.Api.deps.json'
+      runtimeConfigFile: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Api/Blab.Api.runtimeconfig.json'
+      dbContextClassName: 'BlabDbContext'
+
+  - task: bendayconsulting.build-task.deployefcoremigrations.deployefcoremigrations@1
+    displayName: 'Apply EF Core migrations - OpenIddict'
+    inputs:
+      migrationsDll: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity/Blab.DataAccess.dll'
+      migrationsNamespace: Blab.DataAccess.OpenIddict
+      startupDll: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity/Blab.Identity.dll'
+      depsJsonFile: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity/Blab.Identity.deps.json'
+      runtimeConfigFile: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity/Blab.Identity.runtimeconfig.json'
+      dbContextClassName: 'OpenIddictDbContext'
+
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Deploy Web'
+    inputs:
+      azureSubscription: ${{ parameters.environmentSubscription }}
+      WebAppName: '${{ parameters.webResourceName }}'
+      ResourceGroupName: '${{ parameters.resourceGroupName }}'
+      package: $(Pipeline.Workspace)/$(Build.DefinitionName)/blab-ui
+      enableCustomDeployment: true
+      RemoveAdditionalFilesFlag: true
+
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Deploy API'
+    inputs:
+      azureSubscription: ${{parameters.environmentSubscription}}
+      WebAppName: '${{ parameters.apiResourceName }}'
+      ResourceGroupName: '${{ parameters.resourceGroupName }}'
+      package: $(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Api
+      enableCustomDeployment: true
+      RemoveAdditionalFilesFlag: true
+
+  - task: AzureRmWebAppDeployment@4
+    displayName: 'Deploy Identity'
+    inputs:
+      azureSubscription: ${{parameters.environmentSubscription}}
+      WebAppName: '${{ parameters.identityResourceName }}'
+      ResourceGroupName: '${{ parameters.resourceGroupName }}'
+      package: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity'
+      enableCustomDeployment: true
+      RemoveAdditionalFilesFlag: true
+
+  - template: /src/deployment/openiddict/tasks/openiddict-seeding-efcore.yaml@templates
+    parameters:
+      toolVersion: '1.4.9' # Specify the version of Audacia.Auth.OpenIddict that you are targeting
+      identityProjectBasePath: '$(Pipeline.Workspace)/$(Build.DefinitionName)/Blab.Identity' # The path to the identity app artifact
+      identityProjectName: 'Blab.Identity'
+      openIddictEntitiesKeyType: 'int'
+      databaseConnectionStringName: 'OpenIddictDbContext'

@@ -1,0 +1,36 @@
+# Stage to build API, Identity and UI. Then Publish Artifact for each along with terraform
+stages:
+  - stage: Build
+    displayName: Build
+    jobs:
+
+      - template: /src/build/dotnet/jobs/aspnet-core.job.yaml@templates
+        parameters:
+          displayName: Build API
+          projects: '$(System.DefaultWorkingDirectory)/src/Blab.Api/src/Blab.Api/Blab.Api.csproj'
+          shouldRunTests: false
+
+      - template: /src/build/dotnet/jobs/aspnet-core.job.yaml@templates
+        parameters:
+          displayName: Build Identity
+          projects: '$(System.DefaultWorkingDirectory)/src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj'
+          shouldRunTests: false
+
+      - job: BuildNpm
+        displayName: Build UI
+        steps:
+        - template: /src/build/npm/tasks/install.yaml@templates
+          parameters:
+            path: '/src/Blab.Ui'
+
+        - template: /src/build/npm/tasks/build.yaml@templates
+          parameters:
+            path: '/src/Blab.Ui'
+
+        - template: /src/build/npm/tasks/test.yaml@templates
+          parameters:
+            path: '/src/Blab.Ui'
+
+        - template: /src/build/npm/tasks/publish.yaml@templates
+          parameters:
+            path: '/src/Blab.Ui'

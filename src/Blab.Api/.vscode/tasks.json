@@ -1,0 +1,221 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build API",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Identity",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Audacia.Template.Identity/Audacia.Template.Identity.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build Seeding",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Audacia.Template.Seeding/Audacia.Template.Seeding.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Build UI",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/src/Audacia.Template.Ui/Audacia.Template.Ui.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Apply Migrations",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "-p",
+                "${workspaceFolder}/src/Audacia.Template.EntityFramework/Audacia.Template.EntityFramework.csproj",
+                "-s",
+                "${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj",
+                "--verbose"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Generate Migration Script",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "script",
+                "-p",
+                "${workspaceFolder}/src/Audacia.Template.EntityFramework/Audacia.Template.EntityFramework.csproj",
+                "-s",
+                "${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj",
+                "--verbose",
+                "-i",
+                "-o",
+                "${workspaceFolder}/Migrations.sql"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add Migration",
+            "command": "",
+            "type": "shell",
+            "args": [
+                {
+                    "value": "$migrationName = read-host 'Enter name of migration';",
+                    "quoting": "weak"
+                },
+                {
+                    "value": "dotnet ef migrations add $migrationName -p ${workspaceFolder}/src/Audacia.Template.EntityFramework/Audacia.Template.EntityFramework.csproj -s ${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj -v",
+                    "quoting": "weak"
+                }
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Update to specified Migration",
+            "command": "",
+            "type": "shell",
+            "args": [
+                {
+                    "value": "$migrationName = read-host 'Enter name of migration';",
+                    "quoting": "weak"
+                },
+                {
+                    "value": "dotnet ef database update $migrationName -p ${workspaceFolder}/src/Audacia.Template.EntityFramework/Audacia.Template.EntityFramework.csproj -s ${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj -v",
+                    "quoting": "weak"
+                }
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Revert Last Migration",
+            "command": "dotnet",
+            "type": "shell",
+            "args": [
+                "ef",
+                "migrations",
+                "remove",
+                "-p",
+                "${workspaceFolder}/src/Audacia.Template.EntityFramework/Audacia.Template.EntityFramework.csproj",
+                "-s",
+                "${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj",
+                "--verbose"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": ["clean"],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Add Secret",
+            "command": "",
+            "type": "shell",
+            "args": [
+                {
+                    "value": "$secretName = read-host 'Enter name of secret';",
+                    "quoting": "weak"
+                },
+                {
+                    "value": "$secretValue = read-host 'Enter value for secret';",
+                    "quoting": "weak"
+                },
+                {
+                    "value": "dotnet user-secrets set $secretName $secretValue -p ${workspaceFolder}/src/Audacia.Template.Api/Audacia.Template.Api.csproj",
+                    "quoting": "weak"
+                }
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/Audacia.Template/tests/Audacia.Template.Tests/Audacia.Template.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test (Continuous)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "--project",
+                "${workspaceFolder}/tests",
+                "test",
+                "${workspaceFolder}/Audacia.Template/tests/Audacia.Template.Tests/Audacia.Template.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test With Coverage",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutputFormat=lcov",
+                "/p:CoverletOutput=./lcov.info",
+                "/p:CopyLocalLockFileAssemblies=true",
+                "${workspaceFolder}/Audacia.Template/tests/Audacia.Template.Tests/Audacia.Template.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Test With Coverage (Continuous)",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "--project",
+                "${workspaceFolder}/tests",
+                "test",
+                "/p:CollectCoverage=true",
+                "/p:CoverletOutputFormat=lcov",
+                "/p:CoverletOutput=./lcov.info",
+                "/p:CopyLocalLockFileAssemblies=true",
+                "${workspaceFolder}/Audacia.Template/tests/Audacia.Template.Tests/Audacia.Template.Tests.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

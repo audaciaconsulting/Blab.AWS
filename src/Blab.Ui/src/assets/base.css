@@ -1,0 +1,22 @@
+/* styling framework for blab */
+:root {
+  --primary-color: #003c4d;
+  --secondary-color: #00b489;
+  --tertiary-color: #e3abff;
+  --background-color: #002029;
+  --sidebar-color: #002833;
+  --border-bottom: rgba(255, 255, 255, 0.1);
+  --border-radius-amount: 1rem;
+  --icon-color: #33ffce;
+  --error-color: rgb(253, 67, 67);
+  --box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  --navBarWidth: 200px;
+
+}
+
+/* color palette from <https://github.com/vuejs/theme> */
+
+/* semantic color variables for this project */
+
+@media (prefers-color-scheme: dark) {
+}

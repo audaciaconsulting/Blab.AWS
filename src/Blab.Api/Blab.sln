@@ -1,0 +1,94 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.Api", "src\Blab.Api\Blab.Api.csproj", "{3A491BC7-3F55-4ACB-B330-05092E1A6A34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FF2E4F80-0041-49F4-BA84-4785339C1B12}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.DataAccess", "src\Blab.DataAccess\Blab.DataAccess.csproj", "{B2AA7FE1-83EB-482B-BC2C-1E256643AECF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.Domain", "src\Blab.Domain\Blab.Domain.csproj", "{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{D0784F2F-42E9-45D3-AE2A-E2BBD59191D4}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\dependency-check.pipeline.yaml = ..\..\build\dependency-check.pipeline.yaml
+		..\..\build\pr.pipeline.yaml = ..\..\build\pr.pipeline.yaml
+		..\..\build\qa.pipeline.yaml = ..\..\build\qa.pipeline.yaml
+		..\..\build\release.pipeline.yaml = ..\..\build\release.pipeline.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.Identity", "src\Blab.Identity\Blab.Identity.csproj", "{B81CB13F-3822-4171-B329-6276E3D53E32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.Services", "src\Blab.Services\Blab.Services.csproj", "{697CBBAF-5484-4BB1-B50D-ECF1E4E62462}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F258A94A-CF6D-457B-8FA5-7C7DF68A53B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blab.Tests", "tests\Blab.Tests\Blab.Tests.csproj", "{18101876-C42F-41DA-9417-1600F89C78C6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "stages", "stages", "{EDB5EEC1-5753-4FCD-AEEF-4F4ED99BDC35}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\stages\build.stage.yaml = ..\..\build\stages\build.stage.yaml
+		..\..\build\stages\deploy.stage.yaml = ..\..\build\stages\deploy.stage.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "jobs", "jobs", "{D46FA1DD-A3C7-4544-8579-A5AD5E50A2A8}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\jobs\deploy.job.yaml = ..\..\build\jobs\deploy.job.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{DAAE8EA7-956D-4555-A837-697808C5F2E9}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\build\steps\deploy.steps.yaml = ..\..\build\steps\deploy.steps.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A491BC7-3F55-4ACB-B330-05092E1A6A34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A491BC7-3F55-4ACB-B330-05092E1A6A34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A491BC7-3F55-4ACB-B330-05092E1A6A34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A491BC7-3F55-4ACB-B330-05092E1A6A34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2AA7FE1-83EB-482B-BC2C-1E256643AECF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2AA7FE1-83EB-482B-BC2C-1E256643AECF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2AA7FE1-83EB-482B-BC2C-1E256643AECF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2AA7FE1-83EB-482B-BC2C-1E256643AECF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B81CB13F-3822-4171-B329-6276E3D53E32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B81CB13F-3822-4171-B329-6276E3D53E32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B81CB13F-3822-4171-B329-6276E3D53E32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B81CB13F-3822-4171-B329-6276E3D53E32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{697CBBAF-5484-4BB1-B50D-ECF1E4E62462}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{697CBBAF-5484-4BB1-B50D-ECF1E4E62462}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{697CBBAF-5484-4BB1-B50D-ECF1E4E62462}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{697CBBAF-5484-4BB1-B50D-ECF1E4E62462}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18101876-C42F-41DA-9417-1600F89C78C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18101876-C42F-41DA-9417-1600F89C78C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18101876-C42F-41DA-9417-1600F89C78C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18101876-C42F-41DA-9417-1600F89C78C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A491BC7-3F55-4ACB-B330-05092E1A6A34} = {FF2E4F80-0041-49F4-BA84-4785339C1B12}
+		{B2AA7FE1-83EB-482B-BC2C-1E256643AECF} = {FF2E4F80-0041-49F4-BA84-4785339C1B12}
+		{E6AEEC6A-9480-4FFD-8E07-5B2C700CECD3} = {FF2E4F80-0041-49F4-BA84-4785339C1B12}
+		{B81CB13F-3822-4171-B329-6276E3D53E32} = {FF2E4F80-0041-49F4-BA84-4785339C1B12}
+		{697CBBAF-5484-4BB1-B50D-ECF1E4E62462} = {FF2E4F80-0041-49F4-BA84-4785339C1B12}
+		{18101876-C42F-41DA-9417-1600F89C78C6} = {F258A94A-CF6D-457B-8FA5-7C7DF68A53B3}
+		{EDB5EEC1-5753-4FCD-AEEF-4F4ED99BDC35} = {D0784F2F-42E9-45D3-AE2A-E2BBD59191D4}
+		{D46FA1DD-A3C7-4544-8579-A5AD5E50A2A8} = {D0784F2F-42E9-45D3-AE2A-E2BBD59191D4}
+		{DAAE8EA7-956D-4555-A837-697808C5F2E9} = {D0784F2F-42E9-45D3-AE2A-E2BBD59191D4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B395C086-F6E0-49BD-91D4-A800B1A9C06D}
+	EndGlobalSection
+EndGlobal

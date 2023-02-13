@@ -1,0 +1,54 @@
+{
+  "author": "Audacia Software",
+  "classifications": ["Web", "ASP.NET", "API"],
+  "name": "Audacia Software .NET 6 API Project",
+  "identity": "Blab.Api",
+  "shortName": "blabapi",
+  "tags": {
+    "language": "C#"
+  },
+  "sourceName": "Blab",
+  "preferNameDirectory": "false",
+  "postActions": [
+    {
+      "description": "*** What to do next ***",
+      "manualInstructions": [
+        {
+          "text": "Follow the instructions in the API project README to get started."
+        }
+      ],
+      "actionId": "AC1156F7-BB77-4DB8-B28F-24EEBCCA1E5C",
+      "continueOnError": true
+    },
+    {
+      "description": "Add API project to solution",
+      "manualInstructions": "Add API project to the solution manually.",
+      "args": {
+        "projectFiles": ["./Blab.Api/Blab.Api.csproj"]
+      },
+      "actionId": "D396686C-DE0E-4DE6-906D-291CD29FC5DE",
+      "continueOnError": true
+    }
+  ],
+  "sources": [
+    {
+      "exclude": [
+        "**/node_modules/**/*",
+        ".vs/**",
+        ".git/**",
+        ".idea/**",
+        ".obj/**",
+        "**/bin/**",
+        "**/obj/**",
+        ".template.config/**",
+        "build/**",
+        "_rels/**",
+        "package/**",
+        ".nuget/**",
+        "[[]Content_Types].xml"
+      ],
+      "include": ["**/*"]
+    }
+  ],
+  "symbols": {}
+}

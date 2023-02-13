@@ -1,0 +1,88 @@
+@import "./base.css";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--color-text);
+  background: var(--color-background);
+  transition: color 0.5s, background-color 0.5s;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-height: 100vh;
+}
+
+body,
+html {
+  background-color: var(--background-color);
+  color: #fff;
+  font-family: "Nunito Sans", sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+  overflow-y: auto;
+}
+
+.blur-background {
+  z-index: 100;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(5px);
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+input,
+text-area,
+button {
+  font-family: "Nunito Sans", sans-serif;
+}
+.v-enter-active,
+.v-leave-active {
+  z-index: 100;
+  transition: all 250ms ease-in-out;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+  z-index: 100;
+}
+.error {
+  font-size: 1.2rem;
+  color: var(--error-color);
+  font-weight: 800;
+}
+
+input {
+  outline: none;
+  border: none;
+}
+/* Custom scrollbar CSS */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #005a74;
+}
+
+::-webkit-scrollbar-thumb:hover,
+::-webkit-scrollbar-thumb:active,
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 2rem;
+}
+.disable {
+  opacity: 0.5;
+  pointer-events: none;
+}

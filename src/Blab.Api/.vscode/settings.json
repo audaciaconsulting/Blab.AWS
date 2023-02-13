@@ -1,0 +1,4 @@
+{
+    "dotnet-test-explorer.testProjectPath": "**/tests/**/*.Tests.csproj",
+    "prettier.ignorePath": ".prettierignore"
+}

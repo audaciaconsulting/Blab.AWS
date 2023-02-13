@@ -1,0 +1,23 @@
+name: $(Date:yyyyMMdd)
+trigger: none
+pr: none
+schedules:
+- cron: "20 2 * * 2"
+  displayName: Weekly Dependency Check
+  branches:
+    include:
+    - dev
+  always: true
+resources:
+  repositories:
+  - repository: templates
+    type: git
+    name: Audacia/Audacia.Build
+pool: 
+  vmImage: windows-latest
+
+jobs:
+
+- template: /src/security/dependency-check/jobs/dependency-check.job.yaml@templates
+  parameters:
+    npmProjects: [ { name: UI, path: src/Blab.Ui } ]

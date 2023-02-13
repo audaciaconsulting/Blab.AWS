@@ -1,0 +1,31 @@
+# Job template to deploy to a specific environment
+parameters:
+  environmentName: '' # Name of the environment
+  environmentDisplayName: '' # Display Name of the environment 
+  environmentSubscription: '' # Subscription to deploy resources to
+  azureVariableGroup: '' # Variable group for azure
+  appSettingsVariableGroup: '' # Variable group for app settings
+
+jobs:
+  - deployment: Deploy_${{parameters.environmentDisplayName}}
+    displayName: Deploy ${{parameters.environmentDisplayName}}
+    environment: ${{parameters.environmentName}}
+    variables:
+      - group: ${{parameters.azureVariableGroup}}
+      - group: ${{parameters.appSettingsVariableGroup}}
+
+    strategy:
+      runOnce: 
+        deploy:
+          steps:
+            - template: ../steps/deploy.steps.yaml
+              parameters:
+                environmentSubscription: ${{ parameters.environmentSubscription }}
+                resourceGroupName: $(ResourceGroupName)
+                apiResourceName: $(ApiResourceName)
+                apiUrl: $(EndpointConfig.Api)
+                identityResourceName: $(IdentityResourceName)
+                identityUrl: $(EndpointConfig.Identity)
+                webResourceName: $(WebResourceName)
+                webUrl: $(EndpointConfig.Ui)
+                sqlConnectionString: $(ConnectionStrings.DatabaseContext)

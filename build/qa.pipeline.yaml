@@ -1,0 +1,52 @@
+# Example of a dev branch pipeline to build and deploy the dev branch to a QA environment.
+# The project name is set to 'Audacia.Template' throughout, so use find-and-replace to set a new name.
+# Both deploy-staging.job and deploy.job refer to various variables groups therefore you must
+# ensure they (or equivalent) are present.
+# The pipeline can be modified to suit your purposes by adding/removing steps as appropriate.
+#
+# Build:
+# The build stage runs three .NET builds (for an API, an Identity app and a seeding console app) and one npm build.
+#
+# Deploy:
+# The deploy stage consists of two jobs: a deployment to a staging environment, and a deployment to a non-staging environment.
+# The deploy-staging.job contains the following steps:
+#  1. Config transformation
+#  2. EF Core migrations to staging database
+#  3. Deployments to web app staging slots
+#  4. Calling healthcheck endpoints on API and Identity apps
+#  5. Running the seeding app to seed a staging database
+# The deploy.job contains the following steps:
+#  1. Config transformation
+#  2. FTP deployment of transformed config files to staging slots
+#  3. EF Core migrations to non-staging database
+#  4. Restart web apps
+#  5. Deployment slot swaps
+#  6. Calling healthcheck endpoints on API and Identity apps
+#  7. Running the seeding app to seed a staging database
+
+name: $(Year:yy)$(DayOfYear).$(rev:r)
+trigger:
+  batch: true
+  branches:
+    include:
+      - dev
+resources:
+  repositories:
+    - repository: templates
+      type: git
+      name: Audacia/Audacia.Build
+pool:
+  vmImage: windows-latest
+
+stages:
+  # Build All Projects
+  - template: stages/build.stage.yaml
+
+  # Deploy to QA
+  - template: stages/deploy.stage.yaml
+    parameters:
+      environmentName: 'Dev'
+      environmentDisplayName: 'QA'
+      environmentSubscription: 'QA Deployment'
+      azureVariableGroup: 'Blab.QA.Azure'
+      appSettingsVariableGroup: 'Blab.QA.AppSettings'
