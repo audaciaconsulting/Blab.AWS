@@ -1,0 +1,40 @@
+name: 'Run NPM application steps'
+
+inputs:
+  node-version:
+    required: false
+    type: string
+    default: 'latest'
+  should-run-tests:
+    required: false
+    type: boolean
+  path:
+    required: true
+    type: string
+  artifact-name:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+  - uses: ./.github/actions/build/common/environment/setup-node-environment.task.yaml
+    with:
+      node-version: ${{ inputs.node-version }}
+  - uses: ./.github/actions/build/npm/tasks/authenticate.task.yaml
+    with:
+      path: ${{ inputs.path }}
+  - uses: ./.github/actions/build/npm/tasks/install.task.yaml
+    with:
+      path: ${{ inputs.path }}
+  - uses: ./.github/actions/build/npm/tasks/build.task.yaml
+    with:
+      path: ${{ inputs.path }}
+  - uses: ./.github/actions/build/npm/tasks/test.task.yaml
+    with:
+      path: ${{ inputs.path }}
+      should-run-tests: ${{ inputs.should-run-tests }}
+  - uses: ./.github/actions/build/npm/tasks/publish.task.yaml
+    with:
+      path: ${{ inputs.path }}
+      artifact-name: ${{ inputs.artifact-name }}

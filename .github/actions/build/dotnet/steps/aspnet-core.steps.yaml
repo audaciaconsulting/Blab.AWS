@@ -1,0 +1,68 @@
+name: 'Build .NET steps'
+
+inputs:
+  should-run-tests:
+    required: false
+    type: boolean
+    default: true
+  projects:
+    required: false
+    type: string
+    default: '**/*.csproj'
+  tests:
+    required: false
+    type: string
+    default: '**/*.Tests.csproj'
+  apply-versioning:
+    required: false
+    type: boolean
+    default: true
+  dotnet-version:
+    required: false
+    type: string
+    default: 'latest'
+
+runs:
+  using: "composite"
+  steps:
+  - uses: /src/build/common/environment/setup-dotnet-environment.task.yaml
+    with:
+      dotnet-version: ${{ inputs.dotnet-version }}
+  - uses: /src/build/dotnet/tasks/restore.task.yaml
+    with:
+      projects: ${{ inputs.projects }}
+  - uses: /src/build/dotnet/tasks/build.task.yaml
+    with:
+      projects: ${{ inputs.projects }}
+  - uses: /src/build/dotnet/tasks/test.task.yaml
+    with:
+      projects: ${{ inputs.tests }}
+      should-run-tests: ${{ inputs.should-run-tests }}
+  - uses: /src/build/dotnet/tasks/publish.task.yaml
+    with:
+      projects: ${{ inputs.projects }}
+  - uses: /src/build/common/artifacts/upload.task.yaml
+    
+  # test:
+  #   if: ${{ inputs.should-run-tests }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - name: Test
+  #     run: dotnet test --no-build --verbosity normal
+  # upload-artifacts:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # Upload the artifact to a temporary directory
+  #   - name: Archive production artifacts
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: dist-without-markdown
+  #         path: |
+  #           dist
+  #           !dist/**/*.md
+  #   # Upload the code coverage results to a temporary directory
+  #   - name: Archive code coverage results
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: code-coverage-report
+  #       path: output/test/code-coverage.html

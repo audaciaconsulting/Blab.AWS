@@ -1,0 +1,22 @@
+name: '.NET Build'
+description: ''
+
+inputs:
+  projects:
+    required: false
+    type: string
+    default:  '**/*.csproj'
+  configuration:
+    required: false
+    type: string
+    default: 'Release'
+  ms-build-architecture:
+    required: false
+    type: string
+    default: 'x64'
+
+runs:
+  using: "composite"
+  steps:
+  - name: '.NET Build'
+    run: dotnet build ${{ inputs.projects }} --no-restore -c ${{ inputs.configuration }} -a ${{ inputs.ms-build-architecture }}

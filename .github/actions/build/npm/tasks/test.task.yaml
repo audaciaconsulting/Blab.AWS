@@ -1,0 +1,18 @@
+name: 'NPM Test'
+description: ''
+
+inputs:
+  path:
+    required: true
+    type: string
+  should-run-tests:
+    required: false
+    type: boolean
+    default: true
+
+runs:
+  using: "composite"
+  if: ${{ inputs.should-run-tests }}
+  steps:
+    run: cd ${{ inputs.path }}
+    run: npm test

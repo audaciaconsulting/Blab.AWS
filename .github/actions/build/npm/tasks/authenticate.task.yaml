@@ -1,0 +1,12 @@
+name: 'NPM Build'
+description: ''
+
+inputs:
+  path:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc

@@ -1,0 +1,36 @@
+
+
+
+
+name: 'Deploy to Elastic BeanStalk'
+description: 'Deploys an artifact to an AWS Elastic BeanStalk instance'
+
+inputs:
+  application-name:
+    required: true
+    type: string
+  environment-name:
+    required: false
+    type: string
+  region:
+    required: false
+    type: string
+    default: 'eu-west-2' # London
+  deployment-package:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+  - name: convert artifact to .zip
+  
+  - name: Deploy to Elastic BeanStalk
+    uses: einaregilsson/beanstalk-deploy@v21
+    with:
+      aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }} # stored in secrets section of the Github repo
+      aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }} # stored in secrets section of the Github repo
+      application_name: ${{ inputs.application-name }}
+      environment_name: ${{ inputs.environment-name }}
+      region: ${{ inputs.region }}
+      deployment_package: ${{ inputs.deployment-package }} # this is the name of the artifact directory, this may need to be a .zip - https://github.com/einaregilsson/beanstalk-deploy

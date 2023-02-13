@@ -1,0 +1,23 @@
+name: '.NET Test'
+description: ''
+
+inputs:
+  projects:
+    required: false
+    type: string
+    default: '**/*.Tests.dll'
+  configuration:
+    required: false
+    type: string
+    default: 'Release'
+  should-run-tests:
+    required: false
+    type: boolean
+    default: true
+
+runs:
+  using: "composite"
+  if: ${{ inputs.should-run-tests }}
+  steps:
+  - name: '.NET Test'
+    run: dotnet test ${{ inputs.projects }} --no-restore -c ${{ inputs.configuration }} -a ${{ inputs.ms-build-architecture }} --collect "Code coverage"

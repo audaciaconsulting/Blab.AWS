@@ -1,0 +1,38 @@
+inputs:
+  display-name:
+    required: false
+    type: string
+    default: 'Build .NET'
+  should-run-tests:
+    required: false
+    type: boolean
+    default: true
+  projects:
+    required: false
+    type: string
+    default: '**/*.csproj'
+  tests:
+    required: false
+    type: string
+    default: '**/*.Tests.csproj'
+  apply-versioning:
+    required: false
+    type: boolean
+    default: true
+  dotnet-version:
+    required: false
+    type: string
+    default: 'latest'
+
+name: ${{ inputs.display-name }}
+
+runs:
+  using: "composite"
+  steps:
+  - uses: ./.github/actions/build/dotnet/steps/aspnet-core.steps.yaml
+    with:
+      should-run-tests: ${{ inputs.should-run-tests }}
+      projects: ${{ inputs.projects }}
+      tests: ${{ inputs.tests }}
+      apply-versioning: ${{ inputs.apply-versioning }}
+      dotnet-version: ${{ inputs.dotnet-version }}

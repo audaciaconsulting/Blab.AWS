@@ -1,0 +1,38 @@
+
+
+
+
+name: 'Deploy to an AWS S3 Bucket'
+description: 'Deploys an artifact to an AWS S3 bucket'
+
+inputs:
+  application-name:
+    required: true
+    type: string
+  region:
+    required: false
+    type: string
+    default: 'eu-west-2' # London
+  paths:
+    required: true
+    type: string
+  ignore-paths:
+    required: false
+    type: string
+    default: ''
+
+runs:
+  using: "composite"
+  steps:
+  - name: Configure AWS details
+    uses: aws-actions/configure-aws-credentials@v1
+    with:
+      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      aws-secret-access-key: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+      aws-region: ${{ inputs.region }}
+  - name: Deploy to S3
+    uses: ./.github/actions/build/common/artifacts/upload.task.yaml
+    with:
+      artifact-name: ${{ inputs.application-name }}
+      paths: ${{ inputs.paths }}
+      ignore-paths: ${{ inputs.ignore-paths }}

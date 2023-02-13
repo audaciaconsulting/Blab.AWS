@@ -1,0 +1,16 @@
+name: 'Setup dotnet evn'
+description: ''
+
+inputs:
+  dotnet-version:
+    required: false
+    type: string
+    default: 'latest'
+
+runs:
+  using: "composite"
+  steps:
+  - name: Setup .NET
+    uses: actions/setup-dotnet@v3
+    with:
+      dotnet-version: ${{ inputs.dotnet-version }}

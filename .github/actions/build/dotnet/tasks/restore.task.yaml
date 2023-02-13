@@ -1,0 +1,18 @@
+name: '.NET Restore'
+description: ''
+
+inputs:
+  projects:
+    required: false
+    type: string
+    default:  '**/*.csproj'
+  vsts-feed:
+    required: false
+    type: string
+    default: 'Audacia.Public/AudaciaPublic'
+
+runs:
+  using: "composite"
+  steps:
+  - name: '.NET Restore'
+    run: dotnet restore ${{ inputs.projects }} -s ${{ inputs.vsts-feed }}

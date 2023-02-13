@@ -1,0 +1,21 @@
+name: '.NET Publish'
+description: ''
+
+inputs:
+  projects:
+    required: false
+    type: string
+    default:  '**/*.csproj'
+  configuration:
+    required: false
+    type: string
+    default: 'Release'
+  artifact:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+  - name: '.NET Publish'
+    run: dotnet publish ${{ inputs.projects }} --no-restore --no-build -c ${{ inputs.configuration }} --output ${{ inputs.artifact}}

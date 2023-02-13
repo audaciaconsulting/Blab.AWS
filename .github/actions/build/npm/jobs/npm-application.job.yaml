@@ -1,0 +1,30 @@
+inputs:
+  display-name:
+    required: false
+    type: string
+    default: 'Build NPM'
+  node-version:
+    required: false
+    type: string
+    default: 'latest'
+  artifact-name:
+    required: true
+    type: string
+  should-run-tests:
+    required: false
+    type: boolean
+  projects:
+    required: true
+    type: string
+
+name: ${{ inputs.display-name }}
+
+runs:
+  using: "composite"
+  steps:
+  - uses: ./.github/actions/build/npm/steps/npm-application.steps.yaml
+    with:
+      node-version: ${{ inputs.node-version }}
+      should-run-tests: ${{ inputs.should-run-tests }}
+      path: ${{ inputs.path }}
+      artifact-name: ${{ inputs.artifact-name }}

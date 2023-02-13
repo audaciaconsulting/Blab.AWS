@@ -1,0 +1,17 @@
+name: 'Setup node evn'
+description: ''
+
+inputs:
+  node-version:
+    required: false
+    type: string
+    default: 'latest'
+
+runs:
+  using: "composite"
+  steps:
+  - name: Use Node.js ${{ inputs.nodeVersion }}
+    uses: actions/setup-node@v3
+    with:
+      node-version: ${{ inputs.nodeVersion }}
+      cache: 'npm'

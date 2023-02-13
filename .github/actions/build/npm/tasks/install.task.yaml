@@ -1,0 +1,13 @@
+name: 'NPM Install'
+description: ''
+
+inputs:
+  path:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    run: cd ${{ inputs.path }}
+    run: npm ci --prefer-offline --no-audit
