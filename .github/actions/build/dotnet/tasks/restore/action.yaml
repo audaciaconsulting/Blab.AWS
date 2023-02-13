@@ -15,4 +15,5 @@ runs:
   using: "composite"
   steps:
   - name: '.NET Restore'
+    shell: bash
     run: dotnet restore ${{ inputs.projects }} -s ${{ inputs.vsts-feed }}

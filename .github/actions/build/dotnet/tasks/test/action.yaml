@@ -20,4 +20,5 @@ runs:
   if: ${{ inputs.should-run-tests }}
   steps:
   - name: '.NET Test'
+    shell: bash
     run: dotnet test ${{ inputs.projects }} --no-restore -c ${{ inputs.configuration }} -a ${{ inputs.ms-build-architecture }} --collect "Code coverage"

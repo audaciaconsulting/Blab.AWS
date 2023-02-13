@@ -19,4 +19,5 @@ runs:
   using: "composite"
   steps:
   - name: '.NET Build'
+    shell: bash
     run: dotnet build ${{ inputs.projects }} --no-restore -c ${{ inputs.configuration }} -a ${{ inputs.ms-build-architecture }}
