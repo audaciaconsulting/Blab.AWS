@@ -1,0 +1,29 @@
+runs:
+  using: "composite"
+  steps:
+   # checkout
+    - uses: actions/checkout@v3
+    # build api
+    - uses: audaciaconsulting/Audacia.Build/src/build/dotnet/jobs/aspnet-core.job.yaml@template
+      with:
+        display-name: Build Blab API
+        apply-versioning: true
+        projects: './src/LeedsGalvanising.Api/src/LeedsGalvanising.Api/LeedsGalvanising.Api.csproj'
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working
+    # build identity
+    - uses: audaciaconsulting/Audacia.Build/src/build/dotnet/jobs/aspnet-core.job.yaml@template
+      with:
+        display-name: Build Blab Identity
+        apply-versioning: true
+        projects: './src/LeedsGalvanising.Api/src/LeedsGalvanising.Identity/LeedsGalvanising.Identity.csproj'
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working
+    # build vue app
+    - uses: audaciaconsulting/Audacia.Build/src/build/npm/jobs/npm-application.job.yaml@template
+      with:
+        display-name: Build Blab SPA
+        apply-versioning: true
+        projects: './src/LeedsGalvanising.Ui'
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working

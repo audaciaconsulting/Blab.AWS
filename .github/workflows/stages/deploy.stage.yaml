@@ -1,0 +1,72 @@
+name: 'Deploy Stage'
+description: ''
+
+inputs:
+  environment-name: # Name of the environment e.g. 'Quality Assurance' or 'User Acceptance'
+    required: true
+    type: string
+  environment-id: # Id of the environment e.g. 'qa' or 'uat'
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    # variable sub for app settings
+    - name: 'App Settings Variable Substitution'
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '**/appsettings.json'
+      env:
+        AuthenticationConfig.ClientId: 'blab-api'
+        AuthenticationConfig.ClientSecret: ${{ secrets.APPSETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
+
+    # variable sub for .env
+    # variable sub for web.qa.config etc.
+
+    - name: 'Apply EF Core migrations - BlabDbContext'
+      uses: benday-inc/deploy-ef-core-migration@v1.1
+      with:
+        # Path to directory that contains all the files
+        path_to_directory: ''
+        # DLL that contains the EF migrations to deploy
+        migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+        # Root namespace for the EF migrations
+        migrations_namespace: 'Blab.DataAccess'
+        # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
+        startup_dll: 'Blab.Identity/Blab.Identity.dll'
+        # Class name of the DbContext
+        dbcontext_class_name: 'BlabDbContext'
+    - name: 'Apply EF Core migrations - OpenIddictDbContext'
+      uses: benday-inc/deploy-ef-core-migration@v1.1
+      with:
+        # Path to directory that contains all the files
+        path_to_directory: ''
+        # DLL that contains the EF migrations to deploy
+        migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+        # Root namespace for the EF migrations
+        migrations_namespace: 'Blab.DataAccess.OpenIddict'
+        # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
+        startup_dll: 'Blab.Identity/Blab.Identity.dll'
+        # Class name of the DbContext
+        dbcontext_class_name: 'OpenIddictDbContext'
+
+    - name: 'Deploy Web'
+      uses: audaciaconsulting/Audacia.Build/src/deployment/aws/s3-bucket/deploy.task.yaml@template
+      with:
+        application-name: 'blab-ui'
+        path: 'blab-ui'
+        
+    - name: 'Deploy Api'
+      uses: audaciaconsulting/Audacia.Build/src/deployment/aws/elastic-beanstalk/deploy.task.yaml@template
+      with:
+        application-name: 'Blab.Api'
+        environment-name: ${{ inputs.environment-name }}
+        deployment-package: 'blab-api.zip'
+
+    - name: 'Deploy Identity'
+      uses: audaciaconsulting/Audacia.Build/src/deployment/aws/elastic-beanstalk/deploy.task.yaml@template
+      with:
+        application-name: 'Blab.Identity'
+        environment-name: ${{ inputs.environment-name }}
+        deployment-package: 'blab-identity.zip'
