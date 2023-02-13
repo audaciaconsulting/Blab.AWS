@@ -20,7 +20,7 @@ inputs:
   dotnet-version:
     required: false
     type: string
-    default: 'latest'
+    default: '6.x'
 
 runs:
   using: "composite"
