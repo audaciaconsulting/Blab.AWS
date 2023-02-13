@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - uses: ./.github/workflows/stages/build.stage.yaml
+    - uses: ./../.github/workflows/stages/build.stage.yaml
   deploy-qa:
     runs-on: ubuntu-latest
     steps:
