@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: audaciaconsulting/Blab.AWS@ref/.github/workflows/stages/build.stage.yaml
+    - uses: ./.github/workflows/stages/build.stage.yaml
   deploy-qa:
     runs-on: ubuntu-latest
     steps:
-    - uses: audaciaconsulting/Blab.AWS@ref/.github/workflows/stages/deploy.stage.yaml
+    - uses: ./.github/workflows/stages/deploy.stage.yaml
       with:
         environment-name: 'Quality Assurance'
         environment-id: 'qa'
