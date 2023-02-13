@@ -6,11 +6,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: ./stages/build.stage.yaml@template
+    - uses: ./build.stage.yaml
   deploy-qa:
     runs-on: ubuntu-latest
     steps:
-    - uses: ./stages/deploy.stage.yaml@template
+    - uses: ./deploy.stage.yaml
       with:
         environment-name: 'Quality Assurance'
         environment-id: 'qa'
