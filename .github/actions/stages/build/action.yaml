@@ -4,7 +4,7 @@ runs:
    # checkout
     - uses: actions/checkout@v3
     # build api
-    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core.job.yaml
+    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
         display-name: Build Blab API
         apply-versioning: true
@@ -12,7 +12,7 @@ runs:
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
         # should-run-tests: true # TODO: Uncomment when deploying working
     # build identity
-    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core.job.yaml
+    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
         display-name: Build Blab Identity
         apply-versioning: true
@@ -20,7 +20,7 @@ runs:
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
         # should-run-tests: true # TODO: Uncomment when deploying working
     # build vue app
-    - uses: ./.github/actions/build/npm/jobs/npm-application.job.yaml
+    - uses: ./.github/actions/build/npm/jobs/npm-application
       with:
         display-name: Build Blab SPA
         apply-versioning: true
