@@ -6,8 +6,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - run: ls 
+    - name: checkout code
+      uses: actions/checkout@v3
+    - name: LS output after checkout
+      run: ls 
     - uses: ./.github/actions/stages/build
     
   deploy-qa:
