@@ -5,7 +5,7 @@ inputs:
   dotnet-version:
     required: false
     type: string
-    default: '6.x'
+    default: '6.0.x'
 
 runs:
   using: "composite"
