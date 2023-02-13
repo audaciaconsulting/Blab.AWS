@@ -8,11 +8,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - uses: ./../.github/workflows/stages/build.stage
+    - uses: ./../.github/actions/stages/build.stage
   deploy-qa:
     runs-on: ubuntu-latest
     steps:
-    - uses: ./../.github/workflows/stages/deploy.stage
+    - uses: ./../.github/actions/stages/deploy.stage
       with:
         environment-name: 'Quality Assurance'
         environment-id: 'qa'
