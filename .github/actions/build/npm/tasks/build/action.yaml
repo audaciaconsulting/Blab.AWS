@@ -9,5 +9,5 @@ inputs:
 runs:
   using: "composite"
   steps:
-    run: cd ${{ inputs.path }}
-    run: npm run build
+    - run: cd ${{ inputs.path }}
+    - run: npm run build

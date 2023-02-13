@@ -22,7 +22,7 @@ name: ${{ inputs.display-name }}
 runs:
   using: "composite"
   steps:
-  - uses: ./.github/actions/build/npm/steps/npm-application.steps.yaml
+  - uses: ./.github/actions/build/npm/steps/npm-application
     with:
       node-version: ${{ inputs.node-version }}
       should-run-tests: ${{ inputs.should-run-tests }}

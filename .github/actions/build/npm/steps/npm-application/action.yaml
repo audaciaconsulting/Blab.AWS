@@ -18,23 +18,23 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - uses: ./.github/actions/build/common/environment/setup-node-environment.task.yaml
+  - uses: ./.github/actions/build/common/environment/tasks/setup-node-environment
     with:
       node-version: ${{ inputs.node-version }}
-  - uses: ./.github/actions/build/npm/tasks/authenticate.task.yaml
+  - uses: ./.github/actions/build/npm/tasks/authenticate
     with:
       path: ${{ inputs.path }}
-  - uses: ./.github/actions/build/npm/tasks/install.task.yaml
+  - uses: ./.github/actions/build/npm/tasks/install
     with:
       path: ${{ inputs.path }}
-  - uses: ./.github/actions/build/npm/tasks/build.task.yaml
+  - uses: ./.github/actions/build/npm/tasks/build
     with:
       path: ${{ inputs.path }}
-  - uses: ./.github/actions/build/npm/tasks/test.task.yaml
+  - uses: ./.github/actions/build/npm/tasks/test
     with:
       path: ${{ inputs.path }}
       should-run-tests: ${{ inputs.should-run-tests }}
-  - uses: ./.github/actions/build/npm/tasks/publish.task.yaml
+  - uses: ./.github/actions/build/npm/tasks/publish
     with:
       path: ${{ inputs.path }}
       artifact-name: ${{ inputs.artifact-name }}

@@ -29,7 +29,7 @@ name: ${{ inputs.display-name }}
 runs:
   using: "composite"
   steps:
-  - uses: ./.github/actions/build/dotnet/steps/aspnet-core.steps.yaml
+  - uses: ./.github/actions/build/dotnet/steps/aspnet-core
     with:
       should-run-tests: ${{ inputs.should-run-tests }}
       projects: ${{ inputs.projects }}

@@ -31,7 +31,7 @@ runs:
       aws-secret-access-key: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
       aws-region: ${{ inputs.region }}
   - name: Deploy to S3
-    uses: ./.github/actions/build/common/artifacts/upload.task.yaml
+    uses: ./.github/actions/build/common/artifacts/tasks/upload
     with:
       artifact-name: ${{ inputs.application-name }}
       paths: ${{ inputs.paths }}

@@ -52,20 +52,20 @@ runs:
         dbcontext_class_name: 'OpenIddictDbContext'
 
     - name: 'Deploy Web'
-      uses: ./.github/actions/deployment/aws/s3-bucket/deploy.task.yaml@template
+      uses: ./.github/actions/deployment/aws/s3-bucket/deploy@template
       with:
         application-name: 'blab-ui'
         path: 'blab-ui'
         
     - name: 'Deploy Api'
-      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy.task.yaml@template
+      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
       with:
         application-name: 'Blab.Api'
         environment-name: ${{ inputs.environment-name }}
         deployment-package: 'blab-api.zip'
 
     - name: 'Deploy Identity'
-      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy.task.yaml@template
+      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
       with:
         application-name: 'Blab.Identity'
         environment-name: ${{ inputs.environment-name }}

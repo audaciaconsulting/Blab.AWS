@@ -25,23 +25,23 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - uses: /src/build/common/environment/setup-dotnet-environment.task.yaml
+  - uses: /src/build/common/environment/setup-dotnet-environment
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
-  - uses: /src/build/dotnet/tasks/restore.task.yaml
+  - uses: /src/build/dotnet/tasks/restore
     with:
       projects: ${{ inputs.projects }}
-  - uses: /src/build/dotnet/tasks/build.task.yaml
+  - uses: /src/build/dotnet/tasks/build
     with:
       projects: ${{ inputs.projects }}
-  - uses: /src/build/dotnet/tasks/test.task.yaml
+  - uses: /src/build/dotnet/tasks/test
     with:
       projects: ${{ inputs.tests }}
       should-run-tests: ${{ inputs.should-run-tests }}
-  - uses: /src/build/dotnet/tasks/publish.task.yaml
+  - uses: /src/build/dotnet/tasks/publish
     with:
       projects: ${{ inputs.projects }}
-  - uses: /src/build/common/artifacts/upload.task.yaml
+  - uses: /src/build/common/artifacts/tasks/upload
     
   # test:
   #   if: ${{ inputs.should-run-tests }}
