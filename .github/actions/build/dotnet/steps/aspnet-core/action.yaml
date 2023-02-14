@@ -38,7 +38,7 @@ runs:
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
       nuget-feed-source: ${{ inputs.nuget-feed-source }}
-      nuget-feed-name: ${{ inputs.nuget-feed-name }}
+      # nuget-feed-name: ${{ inputs.nuget-feed-name }}
       azure-devops-token: ${{ inputs.azure-devops-token }}
   - uses: ./.github/actions/build/dotnet/tasks/restore
     with:

@@ -6,7 +6,12 @@ inputs:
     required: false
     type: string
     default: '6.0.x'
-    
+  nuget-feed-source:
+    required: false
+    type: string
+  azure-devops-token:
+    required: true
+    type: string
 
 runs:
   using: "composite"
@@ -16,7 +21,6 @@ runs:
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
       source-url: ${{ inputs.nuget-feed-source }}
-      source-name: ${{ inputs.nuget-feed-name }}
     env:
       NUGET_AUTH_TOKEN: ${{ inputs.azure-devops-token }}
 
