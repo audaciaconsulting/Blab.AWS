@@ -14,9 +14,9 @@ jobs:
       run: ls 
     - uses: ./.github/actions/stages/build
       with:
-        nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
-        nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
-        azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+        nuget-feed-name: ${{ env.NUGET_FEED_NAME }}
+        nuget-feed-source: ${{ env.NUGET_FEED_SOURCE }}
+        azure-devops-token: ${{ env.AZURE_DEVOPS_TOKEN }}
     
   deploy-qa:
     needs: build # Step for needing jobs.build to be done before
