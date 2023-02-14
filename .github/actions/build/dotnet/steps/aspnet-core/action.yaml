@@ -37,12 +37,9 @@ runs:
   - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
-  - run: echo "pat token ${{ inputs.azure-devops-token }}"
-    shell: bash
-  - name: Auth NuGet
-    if: ${{ inputs.nuget-feed-name }} != '' 
-    shell: bash
-    run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
+      nuget-feed-source: ${{ inputs.nuget-feed-source }}
+      nuget-feed-name: ${{ inputs.nuget-feed-name }}
+      azure-devops-token: ${{ inputs.azure-devops-token }}
   - uses: ./.github/actions/build/dotnet/tasks/restore
     with:
       projects: ${{ inputs.projects }}

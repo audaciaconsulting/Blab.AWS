@@ -6,6 +6,7 @@ inputs:
     required: false
     type: string
     default: '6.0.x'
+    
 
 runs:
   using: "composite"
@@ -14,3 +15,15 @@ runs:
     uses: actions/setup-dotnet@v3
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
+      source-url: ${{ inputs.nuget-feed-source }}
+      source-name: ${{ inputs.nuget-feed-name }}
+    env:
+      NUGET_AUTH_TOKEN: ${{ inputs.azure-devops-token }}
+
+
+  #     - run: echo "pat token ${{ inputs.azure-devops-token }}"
+  #   shell: bash
+  # - name: Auth NuGet
+  #   if: ${{ inputs.nuget-feed-name }} != '' 
+  #   shell: bash
+  #   run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
