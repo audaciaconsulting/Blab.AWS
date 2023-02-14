@@ -15,8 +15,8 @@ runs:
   steps:
    # checkout
     - uses: actions/checkout@v3
-      shell: bash
     - run: echo "pat token ${{ inputs.azure-devops-token }}"
+      shell: bash
     - name: Auth NuGet
       if: ${{ inputs.nuget-feed-name }} != '' 
       shell: bash
