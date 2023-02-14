@@ -1,5 +1,7 @@
-env:
-  AZURE_DEVOPS_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
+inputs:
+  azure-devops-token:
+    required: true
+    type: string
 
 runs:
   using: "composite"
@@ -8,7 +10,7 @@ runs:
     - uses: actions/checkout@v3
     - name: Auth NuGet
       shell: bash
-      run: dotnet nuget add source ${{ env.nuget_feed_source }} --name ${{ env.nuget_feed_name }} --username az --password ${{ env.AZURE_DEVOPS_TOKEN }}
+      run: dotnet nuget add source ${{ env.nuget_feed_source }} --name ${{ env.nuget_feed_name }} --username az --password ${{ inputs.azure-devops-token }}
   
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
