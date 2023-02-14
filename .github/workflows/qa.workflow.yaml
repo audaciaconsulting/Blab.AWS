@@ -14,6 +14,9 @@ jobs:
       run: ls 
     - uses: ./.github/actions/stages/build
       with:
+        nuget-feed-name: ${{ env.NUGET_FEED_NAME }}
+        nuget-feed-source: ${{ env.NUGET_FEED_SOURCE }}
+      secrets:
         azure-devops-token: ${{ secrets.AZURE_DEVOPS_TOKEN }}
     
   deploy-qa:
