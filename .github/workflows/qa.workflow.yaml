@@ -11,6 +11,8 @@ jobs:
     - name: LS output after checkout
       run: ls 
     - uses: ./.github/actions/stages/build
+      secrets:
+        AZURE_DEVOPS_TOKEN: ${{ secrets.AZURE_DEVOPS_TOKEN }}
     
   deploy-qa:
     needs: build # Step for needing jobs.build to be done before
