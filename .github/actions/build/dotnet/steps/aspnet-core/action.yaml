@@ -28,12 +28,12 @@ runs:
   - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
-  - run: echo "pat token ${{ vars.azure-devops-token }}"
+  - run: echo "pat token ${{ env.azure-devops-token }}"
     shell: bash
   - name: Auth NuGet
     if: ${{ inputs.nuget-feed-name }} != '' 
     shell: bash
-    run: dotnet nuget add source ${{ vars.nuget-feed-source }} --name ${{ vars.nuget-feed-name }} --username az --password ${{ vars.azure-devops-token }} --store-password-in-clear-text
+    run: dotnet nuget add source ${{ env.nuget-feed-source }} --name ${{ env.nuget-feed-name }} --username az --password ${{ env.azure-devops-token }} --store-password-in-clear-text
   - uses: ./.github/actions/build/dotnet/tasks/restore
     with:
       projects: ${{ inputs.projects }}
