@@ -19,4 +19,4 @@ runs:
     run: dotnet nuget list source
   - name: '.NET Restore'
     shell: bash
-    run: dotnet restore ${{ inputs.projects }} -s ${{ inputs.vsts-feed }}
+    run: dotnet restore ${{ inputs.projects }} # -s ${{ inputs.vsts-feed }}
