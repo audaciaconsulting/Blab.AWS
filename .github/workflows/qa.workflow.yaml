@@ -7,6 +7,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: qa
+
     steps:
     - name: checkout code
       uses: actions/checkout@v3
@@ -22,6 +24,8 @@ jobs:
     needs: build # Step for needing jobs.build to be done before
     if: false # disabled for now
     runs-on: ubuntu-latest
+    environment: qa
+    
     steps:
     - uses: ./.github/actions/stages/deploy
       with:
