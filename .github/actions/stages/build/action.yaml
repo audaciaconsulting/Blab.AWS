@@ -3,6 +3,9 @@ runs:
   steps:
    # checkout
     - uses: actions/checkout@v3
+    - name: Auth NuGet
+      run: dotnet nuget add source ${{ env.nuget_feed_source }} --name ${{ env.nuget_feed_name }} --username az --password ${{ secrets.AZURE_DEVOPS_TOKEN }}
+  
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
