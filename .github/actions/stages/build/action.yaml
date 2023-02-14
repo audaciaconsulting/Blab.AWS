@@ -20,7 +20,7 @@ runs:
     - name: Auth NuGet
       if: ${{ inputs.nuget-feed-name }} != '' 
       shell: bash
-      run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }}
+      run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
   
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
