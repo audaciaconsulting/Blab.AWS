@@ -1,4 +1,10 @@
 inputs:
+  nuget-feed-source:
+    required: false
+    type: string
+  nuget-feed-name:
+    required: false
+    type: string
   azure-devops-token:
     required: true
     type: string
@@ -10,8 +16,9 @@ runs:
    # checkout
     - uses: actions/checkout@v3
     - name: Auth NuGet
+      if: ${{ inputs.nuget-feed-name }} != '' 
       shell: bash
-      run: dotnet nuget add source ${{ vars.NUGET_FEED_SOURCE }} --name ${{ vars.NUGET_FEED_NAME }} --username az --password ${{ vars.azure-devops-token }}
+      run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }}
   
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
