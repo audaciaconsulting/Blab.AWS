@@ -10,7 +10,7 @@ runs:
     - uses: actions/checkout@v3
     - name: Auth NuGet
       shell: bash
-      run: dotnet nuget add source ${{ env.nuget_feed_source }} --name ${{ env.nuget_feed_name }} --username az --password ${{ inputs.azure-devops-token }}
+      run: dotnet nuget add source ${{ env.NUGET_FEED_SOURCE }} --name ${{ env.NUGET_FEED_NAME }} --username az --password ${{ inputs.azure-devops-token }}
   
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
