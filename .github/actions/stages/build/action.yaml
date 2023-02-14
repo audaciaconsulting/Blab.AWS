@@ -15,12 +15,6 @@ runs:
   steps:
    # checkout
     - uses: actions/checkout@v3
-    - run: echo "pat token ${{ inputs.azure-devops-token }}"
-      shell: bash
-    - name: Auth NuGet
-      if: ${{ inputs.nuget-feed-name }} != '' 
-      shell: bash
-      run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
   
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
@@ -29,6 +23,7 @@ runs:
         projects: src/Blab.Api/src/Blab.Api/Blab.Api.csproj
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
         # should-run-tests: true # TODO: Uncomment when deploying working
+
     # build identity
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
@@ -36,6 +31,7 @@ runs:
         projects: src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj
         # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
         # should-run-tests: true # TODO: Uncomment when deploying working
+        
     # build vue app
     - uses: ./.github/actions/build/npm/jobs/npm-application
       with:
