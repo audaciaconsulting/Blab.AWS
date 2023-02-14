@@ -24,6 +24,7 @@ inputs:
 
 runs:
   using: "composite"
+  environment: qa
   steps:
   - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
     with:
