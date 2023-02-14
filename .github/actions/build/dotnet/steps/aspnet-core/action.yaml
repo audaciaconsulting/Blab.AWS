@@ -21,20 +21,28 @@ inputs:
     required: false
     type: string
     default: 'latest'
+  nuget-feed-source:
+    required: false
+    type: string
+  nuget-feed-name:
+    required: false
+    type: string
+  azure-devops-token:
+    required: true
+    type: string
 
 runs:
   using: "composite"
-  environment: qa
   steps:
   - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
     with:
       dotnet-version: ${{ inputs.dotnet-version }}
-  - run: echo "pat token ${{ env.azure-devops-token }}"
+  - run: echo "pat token ${{ inputs.azure-devops-token }}"
     shell: bash
   - name: Auth NuGet
     if: ${{ inputs.nuget-feed-name }} != '' 
     shell: bash
-    run: dotnet nuget add source ${{ env.nuget-feed-source }} --name ${{ env.nuget-feed-name }} --username az --password ${{ env.azure-devops-token }} --store-password-in-clear-text
+    run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
   - uses: ./.github/actions/build/dotnet/tasks/restore
     with:
       projects: ${{ inputs.projects }}

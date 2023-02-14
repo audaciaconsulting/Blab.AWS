@@ -21,6 +21,15 @@ inputs:
     required: false
     type: string
     default: '6.x'
+  nuget-feed-source:
+    required: false
+    type: string
+  nuget-feed-name:
+    required: false
+    type: string
+  azure-devops-token:
+    required: true
+    type: string
 
 runs:
   using: "composite"
@@ -32,3 +41,7 @@ runs:
       tests: ${{ inputs.tests }}
       apply-versioning: ${{ inputs.apply-versioning }}
       dotnet-version: ${{ inputs.dotnet-version }}
+      nuget-feed-source: ${{ inputs.nuget-feed-source }}
+      nuget-feed-name: ${{ inputs.nuget-feed-name }}
+      azure-devops-token: ${{ inputs.azure-devops-token }}
+
