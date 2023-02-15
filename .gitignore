@@ -135,11 +135,11 @@ DocProject/Help/*.hhp
 DocProject/Help/Html2
 DocProject/Help/html
 
-# Include all GitHub actions/ workflows
-!**/.github
-
 # Click-Once directory
 publish/
+
+# Include all GitHub actions/ workflows
+!**/.github
 
 # Publish Web Output
 *.[Pp]ublish.xml
