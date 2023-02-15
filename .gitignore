@@ -136,7 +136,7 @@ DocProject/Help/Html2
 DocProject/Help/html
 
 # Include all GitHub actions/ workflows
-!**/.github/
+!**/.github
 
 # Click-Once directory
 publish/
