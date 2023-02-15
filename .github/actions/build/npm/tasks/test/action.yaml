@@ -12,7 +12,8 @@ inputs:
 
 runs:
   using: "composite"
-  if: ${{ inputs.should-run-tests }}
   steps:
-    - run: cd ${{ inputs.path }}
-    - run: npm test
+    - if: ${{ inputs.should-run-tests == true }}
+    - run: |
+          cd ${{ inputs.path }}
+          npm test

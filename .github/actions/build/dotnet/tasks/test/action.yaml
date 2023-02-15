@@ -17,8 +17,8 @@ inputs:
 
 runs:
   using: "composite"
-  if: ${{ inputs.should-run-tests }} == true
   steps:
   - name: '.NET Test'
+    if: ${{ inputs.should-run-tests == true }} 
     shell: bash
     run: dotnet test ${{ inputs.projects }} --no-restore -c ${{ inputs.configuration }} -a ${{ inputs.ms-build-architecture }} --collect "Code coverage"
