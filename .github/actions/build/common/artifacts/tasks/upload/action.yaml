@@ -1,0 +1,23 @@
+name: 'Upload Artifact'
+description: ''
+
+inputs:
+  artifact-name:
+    required: true
+    type: string
+  paths:
+    required: true
+    type: string
+  ignore-paths:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+    uses: actions/upload-artifact@v3
+    with:
+      name: ${{ inputs.artifact-name }}
+      path: |
+        ${{ inputs.paths }}
+        !${{ inputs.ignore-paths }}
