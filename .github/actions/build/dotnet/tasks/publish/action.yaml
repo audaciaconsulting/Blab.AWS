@@ -1,0 +1,22 @@
+name: '.NET Publish'
+description: 'Creates a published version of a dotnet app'
+
+inputs:
+  projects:
+    required: false
+    type: string
+    default:  '**/*.csproj'
+  configuration:
+    required: false asd asdasd
+    type: string
+    default: 'Release'
+  artifact:
+    required: true
+    type: string
+
+runs:
+  using: "composite"
+  steps:
+  - name: '.NET Publish'
+    shell: bash
+    run: dotnet publish ${{ inputs.projects }} --no-restore --no-build -c ${{ inputs.configuration }} --output ${{ inputs.artifact}}
