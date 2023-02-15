@@ -1,6 +1,9 @@
 name: Build .NET'
 
 inputs:
+  artifact-name:
+    required: true
+    type: string
   should-run-tests:
     required: false
     type: boolean
@@ -36,6 +39,7 @@ runs:
   steps:
   - uses: ./.github/actions/build/dotnet/steps/aspnet-core
     with:
+      artifact-name: ${{ inputs.artifact-name }}
       should-run-tests: ${{ inputs.should-run-tests }}
       projects: ${{ inputs.projects }}
       tests: ${{ inputs.tests }}

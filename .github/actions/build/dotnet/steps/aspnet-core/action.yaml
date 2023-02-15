@@ -1,6 +1,9 @@
 name: 'Build .NET steps'
 
 inputs:
+  artifact-name:
+    required: true
+    type: string
   should-run-tests:
     required: false
     type: boolean
@@ -56,6 +59,7 @@ runs:
   - uses: ./.github/actions/build/dotnet/tasks/publish
     with:
       projects: ${{ inputs.projects }}
+      artifact: ${{ inputs.artifact-name }}
   - uses: ./.github/actions/build/common/artifacts/tasks/upload
     
   # test:

@@ -19,6 +19,7 @@ runs:
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
+        artifact-name: 'blab.api'
         apply-versioning: true
         projects: src/Blab.Api/src/Blab.Api/Blab.Api.csproj
         nuget-feed-source: ${{ inputs.nuget-feed-source }}
@@ -30,6 +31,7 @@ runs:
     # build identity
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
+        artifact-name: 'blab.identity'
         apply-versioning: true
         projects: src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj
         nuget-feed-source: ${{ inputs.nuget-feed-source }}
