@@ -17,7 +17,7 @@ inputs:
 
 runs:
   using: "composite"
-  if: ${{ inputs.should-run-tests }}
+  if: ${{ inputs.should-run-tests }} == true
   steps:
   - name: '.NET Test'
     shell: bash
