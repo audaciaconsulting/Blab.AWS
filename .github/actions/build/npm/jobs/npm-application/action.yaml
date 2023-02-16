@@ -14,6 +14,9 @@ inputs:
   projects:
     required: true
     type: string
+  path:
+    required: true
+    type: string
 
 runs:
   using: "composite"
