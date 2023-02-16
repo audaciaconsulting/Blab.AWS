@@ -8,6 +8,10 @@ inputs:
   azure-devops-token:
     required: true
     type: string
+  dotnet-version:
+    required: false
+    type: string
+    default: '6.x'
   
 
 runs:
@@ -15,7 +19,16 @@ runs:
   steps:
    # checkout
     - uses: actions/checkout@v3
-  
+
+    - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
+      with:
+        dotnet-version: ${{ inputs.dotnet-version }}
+    - run: echo "pat token ${{ inputs.azure-devops-token }}"
+      shell: bash
+    - name: Auth NuGet
+      if: ${{ inputs.nuget-feed-name }} != '' 
+      shell: bash
+      run: dotnet nuget add source ${{ inputs.nuget-feed-source }} --name ${{ inputs.nuget-feed-name }} --username az --password ${{ inputs.azure-devops-token }} --store-password-in-clear-text
     # build api
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
