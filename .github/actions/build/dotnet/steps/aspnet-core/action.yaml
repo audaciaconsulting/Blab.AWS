@@ -62,6 +62,7 @@ runs:
       artifact: ${{ inputs.artifact-name }}
   - uses: ./.github/actions/build/common/artifacts/tasks/upload
     with:  
+      artifact-name: ${{ inputs.artifact-name }}
       paths: ${{ inputs.artifact-name }}
     
   # test:
