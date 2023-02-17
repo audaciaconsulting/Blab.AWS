@@ -1,10 +1,10 @@
 name: 'Run NPM application steps'
 
 inputs:
-  node-version:
-    required: false
-    type: string
-    default: 'latest'
+  # node-version:
+  #   required: false
+  #   type: string
+  #   default: 'latest'
   should-run-tests:
     required: false
     type: boolean
@@ -18,9 +18,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-  - uses: ./.github/actions/build/common/environment/tasks/setup-node-environment
-    with:
-      node-version: ${{ inputs.node-version }}
+  # - uses: ./.github/actions/build/common/environment/tasks/setup-node-environment
+  #   with:
+  #     node-version: ${{ inputs.node-version }}
   - uses: ./.github/actions/build/npm/tasks/authenticate
     with:
       path: ${{ inputs.path }}

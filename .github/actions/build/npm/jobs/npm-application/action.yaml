@@ -11,12 +11,14 @@ inputs:
   should-run-tests:
     required: false
     type: boolean
-  projects:
-    required: true
-    type: string
+    default: true
   path:
     required: true
     type: string
+  apply-versioning:
+    required: false
+    type: boolean
+    default: true
 
 runs:
   using: "composite"
