@@ -21,9 +21,9 @@ runs:
   # - uses: ./.github/actions/build/common/environment/tasks/setup-node-environment
   #   with:
   #     node-version: ${{ inputs.node-version }}
-  - uses: ./.github/actions/build/npm/tasks/authenticate
-    with:
-      path: ${{ inputs.path }}
+  # - uses: ./.github/actions/build/npm/tasks/authenticate
+  #   with:
+  #     path: ${{ inputs.path }}
   - uses: ./.github/actions/build/npm/tasks/install
     with:
       path: ${{ inputs.path }}
