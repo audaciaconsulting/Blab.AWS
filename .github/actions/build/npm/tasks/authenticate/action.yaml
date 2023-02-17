@@ -11,4 +11,4 @@ runs:
   steps:
     - name: Authenticate with the npm feeds
       shell: bash
-      run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc
+      run: npx vsts-npm-auth -config ${{ inputs.path }}/.npmrc
