@@ -9,8 +9,9 @@ inputs:
     required: true
     type: string
   ignore-paths:
-    required: true
+    required: false
     type: string
+    default: ''
 
 runs:
   using: "composite"
@@ -19,3 +20,4 @@ runs:
     with:
       name: ${{ inputs.artifact-name }}
       path: ${{ inputs.paths }}
+      ignore-paths: ${{ inputs.ignore-paths }}

@@ -14,5 +14,5 @@ runs:
   steps:
   - uses: ./.github/actions/build/common/artifacts/tasks/upload
     with:
-      path: ${{ inputs.path}}/dist/
-      name: ${{ inputs.artifact-name}}
+      artifact-name: ${{ inputs.artifact-name}}
+      paths: ${{ inputs.path}}/dist/
