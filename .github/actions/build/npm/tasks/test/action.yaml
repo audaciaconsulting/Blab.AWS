@@ -16,6 +16,4 @@ runs:
     - if: ${{ inputs.should-run-tests == true }}
     - name: Run unit tests
       shell: bash
-      run: |
-          cd ${{ inputs.path }}
-          npm test
+      run: npm test --prefix ${{ inputs.path }}
