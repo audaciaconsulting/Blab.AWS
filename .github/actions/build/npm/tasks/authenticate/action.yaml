@@ -9,4 +9,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc
+    - name: Authenticate with the npm feeds
+      shell: bash
+      run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc
