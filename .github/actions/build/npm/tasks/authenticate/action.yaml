@@ -9,4 +9,4 @@ inputs:
 runs:
   using: "composite"
   steps:
-    run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc
+    - run: vsts-npm-auth -config ${{ inputs.path }}/.npmrc
