@@ -9,9 +9,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Change directory to project path
-      shell: bash
-      run: cd ${{ inputs.path }}
+    # - name: Change directory to project path
+    #   shell: bash
+    #   run: cd ${{ inputs.path }}
     - name: Install packages
       shell: bash
-      run: npm install --prefer-offline --no-audit
+      run: npm install --prefix ${{ inputs.path }} --prefer-offline --no-audit

@@ -53,9 +53,9 @@ jobs:
     - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
     - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
-        artifact-name: 'blab.api'
+        artifact-name: 'blab.identity'
         apply-versioning: true
-        projects: src/Blab.Api/src/Blab.Api/Blab.Api.csproj
+        projects: src/Blab.Api/src/Blab.Identity/Blab.Identity.csproj
         nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
         nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
         azure-devops-token: ${{ vars.AZURE_DEVOPS_TOKEN }}

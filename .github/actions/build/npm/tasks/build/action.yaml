@@ -9,9 +9,9 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Change directory to project path
-      shell: bash
-      run: cd ${{ inputs.path }}
+    # - name: Change directory to project path
+    #   shell: bash
+    #   run: cd ${{ inputs.path }}
     - name: Build project
       shell: bash
-      run: npm run build
+      run: npm run build --prefix ${{ inputs.path }}
