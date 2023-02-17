@@ -6,20 +6,86 @@ on:
     branches: [ "dev" ]
 
 jobs:
-  build:
+  build-api:
     runs-on: windows-latest
     environment: qa
 
     steps:
     - name: checkout code
       uses: actions/checkout@v3
-    - name: LS output after checkout
-      run: ls 
-    - uses: ./.github/actions/stages/build
+    # - name: LS output after checkout
+    #   run: ls 
+    # - uses: ./.github/actions/stages/build
+    #   with:
+    #     nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+    #     nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
+    #     azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
+    
+      # create dotnet environment
+    - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
+    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
       with:
-        nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+        artifact-name: 'blab.api'
+        apply-versioning: true
+        projects: src/Blab.Api/src/Blab.Api/Blab.Api.csproj
         nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
-        azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
+        nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+        azure-devops-token: ${{ vars.AZURE_DEVOPS_TOKEN }}
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working
+
+  build-identity:
+    runs-on: windows-latest
+    environment: qa
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+    # - name: LS output after checkout
+    #   run: ls 
+    # - uses: ./.github/actions/stages/build
+    #   with:
+    #     nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+    #     nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
+    #     azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
+    
+      # create dotnet environment 
+    - uses: ./.github/actions/build/common/environment/tasks/setup-dotnet-environment
+    - uses: ./.github/actions/build/dotnet/jobs/aspnet-core
+      with:
+        artifact-name: 'blab.api'
+        apply-versioning: true
+        projects: src/Blab.Api/src/Blab.Api/Blab.Api.csproj
+        nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
+        nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+        azure-devops-token: ${{ vars.AZURE_DEVOPS_TOKEN }}
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working
+
+  build-ui:
+    runs-on: ubuntu-latest
+    environment: qa
+
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v3
+      # create node environment for spa
+    - uses: ./.github/actions/build/common/environment/tasks/setup-node-environment
+    - uses: ./.github/actions/build/npm/jobs/npm-application
+      with:
+        apply-versioning: true
+        path: src/blab.ui
+        artifact-name: blab.ui
+        # tests: '' # Run all csproj which match the pattern **/*.Tests.csproj
+        # should-run-tests: true # TODO: Uncomment when deploying working
+        
+    # - name: LS output after checkout
+    #   run: ls 
+    # - uses: ./.github/actions/stages/build
+    #   with:
+    #     nuget-feed-name: ${{ vars.NUGET_FEED_NAME }}
+    #     nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
+    #     azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
     
   deploy-qa:
     needs: build # Step for needing jobs.build to be done before

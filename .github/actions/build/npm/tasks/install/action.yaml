@@ -14,4 +14,4 @@ runs:
       run: cd ${{ inputs.path }}
     - name: Install packages
       shell: bash
-      run: npm ci --prefer-offline --no-audit
+      run: npm install --prefer-offline --no-audit
