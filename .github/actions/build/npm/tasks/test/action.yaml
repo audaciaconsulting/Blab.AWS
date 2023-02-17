@@ -13,7 +13,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - if: ${{ inputs.should-run-tests == true }}
     - name: Run unit tests
+      if: ${{ inputs.should-run-tests == true }}
       shell: bash
       run: npm test --prefix ${{ inputs.path }}
