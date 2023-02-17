@@ -98,12 +98,20 @@ jobs:
     #     azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
     
   deploy-qa:
-    needs: [build-api, build-identity, build-ui] # Step for needing jobs.build to be done before
-    if: false # disabled for now
+    needs: [build-api, build-identity, build-ui]
     runs-on: windows-latest
     environment: qa
 
     steps:
+    # variable sub for app settings
+    - name: 'App Settings Variable Substitution'
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '**/appsettings.json'
+      env:
+        AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
+        AuthenticationConfig.ClientSecret: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
+
     - uses: ./.github/actions/stages/deploy
       with:
         environment-name: 'Quality Assurance'
