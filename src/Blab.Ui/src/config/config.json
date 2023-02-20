@@ -1,0 +1,6 @@
+{
+    "apiUrl": "https://localhost:44397",
+    "identityUrl": "https://localhost:44374",
+    "uiUrl": "https://localhost:5173",
+    "authTokenLocation": "oidc.user:https://localhost:5173:blab-ui"
+}

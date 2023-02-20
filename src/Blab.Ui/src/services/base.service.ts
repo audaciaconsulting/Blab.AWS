@@ -9,7 +9,7 @@ export class BaseService {
    */
   constructor(baseUrl: string | null = null) {
     if (baseUrl === null || baseUrl === undefined) {
-      this.url = import.meta.env.VITE_API_URL as string;
+      this.url = import.meta.env.API_URL as string;
     } else {
       this.url = baseUrl;
     }

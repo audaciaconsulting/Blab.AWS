@@ -8,14 +8,14 @@ export class AuthService {
   constructor() {
     const settings: UserManagerSettings = {
       userStore: new WebStorageStateStore({ store: window.localStorage }),
-      authority: import.meta.env.VITE_IDENTITY_URL,
+      authority: import.meta.env.IDENTITY_URL,
       client_id: "blab-ui",
       redirect_uri: `${window.location.origin}/auth-callback`,
       automaticSilentRenew: true,
       silent_redirect_uri: `${window.location.origin}/silent-renew-callback`,
       response_type: "code",
       scope: "openid profile api",
-      post_logout_redirect_uri: import.meta.env.VITE_UI_URL,
+      post_logout_redirect_uri: import.meta.env.UI_URL,
       filterProtocolClaims: true,
     };
 
