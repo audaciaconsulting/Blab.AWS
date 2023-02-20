@@ -18,68 +18,68 @@ inputs:
 runs:
   using: "composite"
   steps:
-    # # variable sub for app settings
-    # - name: 'App Settings Variable Substitution'
-    #   uses: microsoft/variable-substitution@v1
-    #   with:
-    #     files: '**/appsettings.json'
-    #   env:
-    #     AuthenticationConfig.ClientId: 'blab-api'
-    #     AuthenticationConfig.ClientSecret: ${{ secrets.APPSETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
+  # # variable sub for app settings
+  # - name: 'App Settings Variable Substitution'
+  #   uses: microsoft/variable-substitution@v1
+  #   with:
+  #     files: '**/appsettings.json'
+  #   env:
+  #     AuthenticationConfig.ClientId: 'blab-api'
+  #     AuthenticationConfig.ClientSecret: ${{ secrets.APPSETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
 
-    # variable sub for .env
-    # variable sub for web.qa.config etc.
+  # variable sub for .env
+  # variable sub for web.qa.config etc.
 
-    - name: 'Apply EF Core migrations - BlabDbContext'
-      uses: benday-inc/deploy-ef-core-migration@v1.1
-      with:
-        # Path to directory that contains all the files
-        path_to_directory: ''
-        # DLL that contains the EF migrations to deploy
-        migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
-        # Root namespace for the EF migrations
-        migrations_namespace: 'Blab.DataAccess'
-        # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
-        startup_dll: 'Blab.Identity/Blab.Identity.dll'
-        # Class name of the DbContext
-        dbcontext_class_name: 'BlabDbContext'
+  - name: 'Apply EF Core migrations - BlabDbContext'
+    uses: benday-inc/deploy-ef-core-migration@v1.1
+    with:
+      # Path to directory that contains all the files
+      path_to_directory: ''
+      # DLL that contains the EF migrations to deploy
+      migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+      # Root namespace for the EF migrations
+      migrations_namespace: 'Blab.DataAccess'
+      # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
+      startup_dll: 'Blab.Identity/Blab.Identity.dll'
+      # Class name of the DbContext
+      dbcontext_class_name: 'BlabDbContext'
 
-    - name: 'Apply EF Core migrations - OpenIddictDbContext'
-      uses: benday-inc/deploy-ef-core-migration@v1.1
-      with:
-        # Path to directory that contains all the files
-        path_to_directory: ''
-        # DLL that contains the EF migrations to deploy
-        migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
-        # Root namespace for the EF migrations
-        migrations_namespace: 'Blab.DataAccess.OpenIddict'
-        # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
-        startup_dll: 'Blab.Identity/Blab.Identity.dll'
-        # Class name of the DbContext
-        dbcontext_class_name: 'OpenIddictDbContext'
+  - name: 'Apply EF Core migrations - OpenIddictDbContext'
+    uses: benday-inc/deploy-ef-core-migration@v1.1
+    with:
+      # Path to directory that contains all the files
+      path_to_directory: ''
+      # DLL that contains the EF migrations to deploy
+      migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+      # Root namespace for the EF migrations
+      migrations_namespace: 'Blab.DataAccess.OpenIddict'
+      # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
+      startup_dll: 'Blab.Identity/Blab.Identity.dll'
+      # Class name of the DbContext
+      dbcontext_class_name: 'OpenIddictDbContext'
 
-    - name: 'Deploy Web'
-      uses: ./.github/actions/deployment/aws/s3-bucket/deploy@template
-      with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
-        application-name: 'blab-ui'
-        path: 'blab-ui'
-        
-    - name: 'Deploy Api'
-      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
-      with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
-        application-name: 'Blab.Api'
-        environment-name: ${{ inputs.environment-name }}
-        deployment-package: 'blab-api'
+  - name: 'Deploy Web'
+    uses: ./.github/actions/deployment/aws/s3-bucket/deploy@template
+    with:
+      aws-access-key-id: ${{ inputs.aws-access-key-id }}
+      aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
+      application-name: 'blab-ui'
+      path: 'blab-ui'
+      
+  - name: 'Deploy Api'
+    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
+    with:
+      aws-access-key-id: ${{ inputs.aws-access-key-id }}
+      aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
+      application-name: 'Blab.Api'
+      environment-name: ${{ inputs.environment-name }}
+      deployment-package: 'blab-api'
 
-    - name: 'Deploy Identity'
-      uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
-      with:
-        aws-access-key-id: ${{ inputs.aws-access-key-id }}
-        aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
-        application-name: 'Blab.Identity'
-        environment-name: ${{ inputs.environment-name }}
-        deployment-package: 'blab-identity'
+  - name: 'Deploy Identity'
+    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
+    with:
+      aws-access-key-id: ${{ inputs.aws-access-key-id }}
+      aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
+      application-name: 'Blab.Identity'
+      environment-name: ${{ inputs.environment-name }}
+      deployment-package: 'blab-identity'
