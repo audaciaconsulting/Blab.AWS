@@ -107,14 +107,17 @@ jobs:
       uses: actions/download-artifact@v3
       with:
         name: 'blab.api'
+        path: 'blab.api'
     - name: Download Identity
       uses: actions/download-artifact@v3
       with:
         name: blab.identity
+        path: blab.identity
     - name: Download UI
       uses: actions/download-artifact@v3
       with:
         name: blab.ui
+        path: blab.ui
 
 
     # variable sub for app settings
