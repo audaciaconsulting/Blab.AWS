@@ -274,8 +274,8 @@ src/Audacia.Template.Ui/wwwroot/assets/
 **/ssl/*.crt
 **/ssl/*.key
 
-# Package templates as they're copied in the build pipeline
-pkg/templates/*
-!pkg/templates/.gitkeep 
-src/Blab.Api/src/Blab.Identity/appsettings.json
-src/Blab.Api/src/Blab.Api/appsettings.json
+# # Package templates as they're copied in the build pipeline
+# pkg/templates/*
+# !pkg/templates/.gitkeep 
+# src/Blab.Api/src/Blab.Identity/appsettings.json
+# src/Blab.Api/src/Blab.Api/appsettings.json
