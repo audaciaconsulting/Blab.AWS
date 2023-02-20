@@ -127,7 +127,7 @@ jobs:
         files: '**/appsettings.json'
       env:
         AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
-        AuthenticationConfig.ClientSecret: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
+        AuthenticationConfig.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
 
     - uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
