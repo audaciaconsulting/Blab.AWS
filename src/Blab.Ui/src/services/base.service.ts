@@ -1,4 +1,5 @@
 import { ApiResponse } from "@/models/api/api-response.model";
+import { config } from "./config.service";
 import { authService } from "@/services/auth.service";
 
 export class BaseService {
@@ -9,7 +10,7 @@ export class BaseService {
    */
   constructor(baseUrl: string | null = null) {
     if (baseUrl === null || baseUrl === undefined) {
-      this.url = import.meta.env.API_URL as string;
+      this.url = config.apiUrl as string;
     } else {
       this.url = baseUrl;
     }

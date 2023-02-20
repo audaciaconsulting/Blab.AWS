@@ -7,9 +7,13 @@ import router from "./router";
 import * as fetchIntercept from "fetch-intercept";
 import { StatusCodes } from "http-status-codes";
 import "./assets/main.css";
+import { ConfigService } from "./services/config.service";
 
 const app = createApp(App);
 const pinia = createPinia();
+
+const configService: ConfigService = new ConfigService();
+configService.load();
 
 const unregister = fetchIntercept.register({
   request: async function (url, config) {
