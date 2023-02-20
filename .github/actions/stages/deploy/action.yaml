@@ -34,13 +34,13 @@ runs:
     uses: benday-inc/deploy-ef-core-migration@v1.1
     with:
       # Path to directory that contains all the files
-      path_to_directory: ''
+      path_to_directory: 'blab.identity'
       # DLL that contains the EF migrations to deploy
-      migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+      migrations_dll: 'Blab.DataAccess.dll'
       # Root namespace for the EF migrations
       migrations_namespace: 'Blab.DataAccess'
       # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
-      startup_dll: 'Blab.Identity/Blab.Identity.dll'
+      startup_dll: 'Blab.Identity.dll'
       # Class name of the DbContext
       dbcontext_class_name: 'BlabDbContext'
 
@@ -48,13 +48,13 @@ runs:
     uses: benday-inc/deploy-ef-core-migration@v1.1
     with:
       # Path to directory that contains all the files
-      path_to_directory: ''
+      path_to_directory: 'blab.identity'
       # DLL that contains the EF migrations to deploy
-      migrations_dll: 'Blab.Identity/Blab.DataAccess.dll'
+      migrations_dll: 'Blab.DataAccess.dll'
       # Root namespace for the EF migrations
       migrations_namespace: 'Blab.DataAccess.OpenIddict'
       # DLL to start deploying migrations from. If you are publishing migrations from a web project, choose the web project DLL.  Otherwise, choose the migration DLL.
-      startup_dll: 'Blab.Identity/Blab.Identity.dll'
+      startup_dll: 'Blab.Identity.dll'
       # Class name of the DbContext
       dbcontext_class_name: 'OpenIddictDbContext'
 
