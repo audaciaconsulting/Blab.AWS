@@ -103,6 +103,7 @@ jobs:
     environment: qa
 
     steps:
+    - uses: actions/checkout@v3
     - name: Download Api
       uses: actions/download-artifact@v3
       with:
@@ -166,7 +167,7 @@ jobs:
     #   with:  
     #     artifact-name: blab.api
     #     paths: blab.api
-    
+
     - uses: ./.github/actions/stages/deploy
       with:
         aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
