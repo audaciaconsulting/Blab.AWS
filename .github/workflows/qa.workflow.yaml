@@ -126,13 +126,51 @@ jobs:
       with:
         files: '**/appsettings.json'
       env:
+        ApplicationInsights.InstrumentationKey: ${{ vars.APP_SETTINGS_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }}
         AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
         AuthenticationConfig.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
+        ApplicationInsights.TestAutomationClient.ClientId: ${{ vars. }}
+        ApplicationInsights.TestAutomationClient.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_SECRET }}
+        Azure.BlobStorageConfig.AccountKey: ${{ secrets.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_KEY }}
+        Azure.BlobStorageConfig.AccountName: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_NAME }}
+        Azure.BlobStorageConfig.ContainerUrl: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_CONTAINER_URL }}
+        ConnectionStrings.BlabDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_BLAB_DB_CONTEX }}
+        ConnectionStrings.OpenIddictDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_OPENIDDICT_DB_CONTEXT }}
+        EndpointConfig.Api: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_API }}
+        EndpointConfig.Identity: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_IDENTITY }}
+        EndpointConfig.Ui: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_UI }}
+        OpenIdConnectConfig.AuthorizationCodeClients.0.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_BASE_URL }}
+        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_0 }}
+        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_1 }}
+        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.2: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_2 }}
+        OpenIdConnectConfig.AuthorizationCodeClients.1.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_BASE_URL }}
+        OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_0 }}
+        OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_1 }}
+        OpenIdConnectConfig.ClientCredentialsClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_CLIENT_CREDENTIALS_CLIENTS_0_CLIENT_SECRET }}
+        OpenIdConnectConfig.ResourceOwnerPasswordClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_RESOURCE_OWNER_PASSWORD_CLIENTS_0_CLIENT_SECRET }}
+        OpenIdConnectConfig.EncryptionCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_ENCRYPTION_CERTIFICATE_THUMBPRINT }}
+        OpenIdConnectConfig.SigningCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_SIGNING_CERTIFICATE_THUMBPRINT }}
 
-    - uses: ./.github/actions/build/common/artifacts/tasks/upload
-      with:  
-        artifact-name: blab.api
-        paths: blab.api
+      # variable sub for app settings
+    - name: 'Ui config Variable Substitution'
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: '**/blab.ui/config.json'
+      env:
+        apiBaseUrl: ${{ vars.UI_CONFIG_API_BASE_URL }}
+        identityUrl: ${{ vars.UI_CONFIG_IDENTITY_URL }}
+        uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
+        clientId: ${{ vars.UI_CONFIG_CLIENT_ID }}
+        clientSecret: ${{ vars.UI_CONFIG_CLIENT_SECRET }}
+        scope: ${{ vars.UI_CONFIG_SCOPE }}
+        validateScope: ${{ vars.UI_CONFIG_VALIDATE_SCOPE }}
+        environmentName: ${{ vars.UI_CONFIG_ENVIRONMENT_SCOPE }}
+        appName: ${{ vars.UI_CONFIG_APPLICATION_NAME }}
+
+    # - uses: ./.github/actions/build/common/artifacts/tasks/upload
+    #   with:  
+    #     artifact-name: blab.api
+    #     paths: blab.api
     # - uses: ./.github/actions/stages/deploy
     #   with:
     #     environment-name: 'Quality Assurance'
