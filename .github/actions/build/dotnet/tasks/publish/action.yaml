@@ -19,4 +19,5 @@ runs:
   steps:
   - name: '.NET Publish'
     shell: bash
-    run: dotnet publish ${{ inputs.projects }} --no-restore --no-build -c ${{ inputs.configuration }} --output ${{ inputs.artifact }}
+    run: dotnet publish ${{ inputs.projects }} --configuration ${{ inputs.configuration }} --output ${{ inputs.artifact }}
+    # run: dotnet publish ${{ inputs.projects }} --no-restore --no-build -c ${{ inputs.configuration }} --output ${{ inputs.artifact }}
