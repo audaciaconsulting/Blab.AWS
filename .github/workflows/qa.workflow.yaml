@@ -162,10 +162,10 @@ jobs:
         uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
         authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
 
-    - uses: ./.github/actions/build/common/artifacts/tasks/upload
-      with:  
-        artifact-name: blab.api
-        paths: blab.api
+    # - uses: ./.github/actions/build/common/artifacts/tasks/upload
+    #   with:  
+    #     artifact-name: blab.api
+    #     paths: blab.api
     - uses: ./.github/actions/stages/deploy
       with:
         aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
