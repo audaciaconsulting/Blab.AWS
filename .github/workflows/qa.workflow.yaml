@@ -129,7 +129,7 @@ jobs:
         ApplicationInsights.InstrumentationKey: ${{ vars.APP_SETTINGS_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }}
         AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
         AuthenticationConfig.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
-        ApplicationInsights.TestAutomationClient.ClientId: ${{ vars. }}
+        ApplicationInsights.TestAutomationClient.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_ID }}
         ApplicationInsights.TestAutomationClient.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_SECRET }}
         Azure.BlobStorageConfig.AccountKey: ${{ secrets.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_KEY }}
         Azure.BlobStorageConfig.AccountName: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_NAME }}
