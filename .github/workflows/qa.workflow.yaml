@@ -157,15 +157,10 @@ jobs:
       with:
         files: '**/blab.ui/config.json'
       env:
-        apiBaseUrl: ${{ vars.UI_CONFIG_API_BASE_URL }}
+        apiUrl: ${{ vars.UI_CONFIG_API_BASE_URL }}
         identityUrl: ${{ vars.UI_CONFIG_IDENTITY_URL }}
         uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
-        clientId: ${{ vars.UI_CONFIG_CLIENT_ID }}
-        clientSecret: ${{ vars.UI_CONFIG_CLIENT_SECRET }}
-        scope: ${{ vars.UI_CONFIG_SCOPE }}
-        validateScope: ${{ vars.UI_CONFIG_VALIDATE_SCOPE }}
-        environmentName: ${{ vars.UI_CONFIG_ENVIRONMENT_SCOPE }}
-        appName: ${{ vars.UI_CONFIG_APPLICATION_NAME }}
+        authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
 
     # - uses: ./.github/actions/build/common/artifacts/tasks/upload
     #   with:  
