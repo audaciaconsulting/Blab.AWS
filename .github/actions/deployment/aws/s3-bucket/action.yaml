@@ -6,6 +6,12 @@ name: 'Deploy to an AWS S3 Bucket'
 description: 'Deploys an artifact to an AWS S3 bucket'
 
 inputs:
+  aws-access-key-id:
+    required: true
+    type: string
+  aws-access-key-secret:
+    required: true
+    type: string
   application-name:
     required: true
     type: string
@@ -27,9 +33,10 @@ runs:
   - name: Configure AWS details
     uses: aws-actions/configure-aws-credentials@v1
     with:
-      aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      aws-secret-access-key: ${{ secrets.AWS_SECRETS_ACCESS_KEY }}
+      aws-access-key-id: ${{ inputs.aws-access-key-id }}
+      aws-secret-access-key: ${{ inputs.aws-access-key-secret }}
       aws-region: ${{ inputs.region }}
+      
   - name: Deploy to S3
     uses: ./.github/actions/build/common/artifacts/tasks/upload
     with:
