@@ -126,7 +126,11 @@ jobs:
         AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
         AuthenticationConfig.ClientSecret: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
 
-    - uses: ./.github/actions/stages/deploy
-      with:
-        environment-name: 'Quality Assurance'
-        environment-id: 'qa'
+    - uses: ./.github/actions/build/common/artifacts/tasks/upload
+      with:  
+        artifact-name: blab.api
+        paths: blab.api
+    # - uses: ./.github/actions/stages/deploy
+    #   with:
+    #     environment-name: 'Quality Assurance'
+    #     environment-id: 'qa'
