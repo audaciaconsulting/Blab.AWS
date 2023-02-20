@@ -103,6 +103,20 @@ jobs:
     environment: qa
 
     steps:
+    - name: Download Api
+      uses: actions/download-artifact@v3
+      with:
+        artifact-name: 'blab.api'
+    - name: Download Identity
+      uses: actions/download-artifact@v3
+      with:
+        artifact-name: blab.identity
+    - name: Download UI
+      uses: actions/download-artifact@v3
+      with:
+        artifact-name: blab.ui
+
+
     # variable sub for app settings
     - name: 'App Settings Variable Substitution'
       uses: microsoft/variable-substitution@v1
