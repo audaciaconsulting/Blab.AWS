@@ -46,3 +46,4 @@ runs:
       aws_secret_access_key: ${{ inputs.aws-access-key-secret }}
       aws_bucket: ${{ inputs.bucket-name }}
       source_dir: ${{ inputs.paths }}
+      destination_dir: '/'

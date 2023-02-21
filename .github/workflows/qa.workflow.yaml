@@ -185,6 +185,13 @@ jobs:
     #   with:  
     #     artifact-name: blab.api
     #     paths: blab.api
+    
+    - name: show artifact outputs
+      shell: bash
+      run: |
+        echo "The api artifact path is ${{ steps.upload-api-artifact.outputs.artifact_path }}"
+        echo "The identity artifact path is ${{ steps.upload-identity-artifact.outputs.artifact_path }}"
+        echo "The ui artifact path is ${{ steps.upload-ui-artifact.outputs.artifact_path }}"
 
     - uses: ./.github/actions/stages/deploy
       with:
