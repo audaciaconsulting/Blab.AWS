@@ -12,6 +12,9 @@ inputs:
   aws-access-key-secret:
     required: true
     type: string
+  bucket-name:
+    required: true
+    type: string
   application-name:
     required: true
     type: string
@@ -32,7 +35,7 @@ runs:
   - name: Deploy to Elastic BeanStalk
     uses: einaregilsson/beanstalk-deploy@v21
     with:
-      existing_bucket_name: ${{ inputs.application-name }}
+      existing_bucket_name: ${{ inputs.bucket-name }}
       aws_access_key: ${{ inputs.aws-access-key-id }} # stored in secrets section of the Github repo
       aws_secret_key: ${{ inputs.aws-access-key-secret }} # stored in secrets section of the Github repo
       application_name: ${{ inputs.application-name }}

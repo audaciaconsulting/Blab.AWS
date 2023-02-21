@@ -84,7 +84,7 @@ runs:
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
-      application-name: 'blab-ui'
+      # application-name: 'blab-ui'
       bucket-name: 'blab-ui'
       paths: ${{ inputs.ui-artifact-path }}
       
@@ -93,6 +93,7 @@ runs:
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
+      bucket-name: 'blab-api'
       application-name: 'Blab.Api'
       environment-name: ${{ inputs.environment-name }}
       deployment-package: ${{ inputs.api-artifact-path }}
@@ -102,6 +103,7 @@ runs:
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
+      bucket-name: 'blab-identity'
       application-name: 'Blab.Identity'
       environment-name: ${{ inputs.environment-name }}
       deployment-package: ${{ inputs.identity-artifact-path }}
