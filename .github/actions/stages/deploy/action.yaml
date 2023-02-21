@@ -71,7 +71,7 @@ runs:
   #     dbcontext_class_name: 'OpenIddictDbContext'
 
   - name: 'Deploy Web'
-    uses: ./.github/actions/deployment/aws/s3-bucket/deploy
+    uses: ./.github/actions/deployment/aws/s3-bucket
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
