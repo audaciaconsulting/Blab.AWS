@@ -164,18 +164,21 @@ jobs:
         authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
 
     - name: Upload Identity Artifact
+      id: upload-identity-artifact
       uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.identity
         paths: blab.identity
 
     - name: Upload Api Artifact
+      id: upload-api-artifact
       uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.api
         paths: blab.api
 
     - name: Upload Ui Artifact
+      id: upload-ui-artifact
       uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.ui
@@ -185,7 +188,7 @@ jobs:
     #   with:  
     #     artifact-name: blab.api
     #     paths: blab.api
-    
+
     - name: show artifact outputs
       shell: bash
       run: |
