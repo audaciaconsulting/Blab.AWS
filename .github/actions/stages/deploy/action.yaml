@@ -34,7 +34,7 @@ runs:
     uses: benday-inc/deploy-ef-core-migration@v1.1
     with:
       # Path to directory that contains all the files
-      path_to_directory: 'blab.identity'
+      path_to_directory: 'src/Blab.Api/src/Blab.Identity/blab.identity'
       # DLL that contains the EF migrations to deploy
       migrations_dll: 'Blab.DataAccess.dll'
       # Root namespace for the EF migrations
@@ -48,7 +48,7 @@ runs:
     uses: benday-inc/deploy-ef-core-migration@v1.1
     with:
       # Path to directory that contains all the files
-      path_to_directory: 'blab.identity'
+      path_to_directory: 'src/Blab.Api/src/Blab.Identity/blab.identity'
       # DLL that contains the EF migrations to deploy
       migrations_dll: 'Blab.DataAccess.dll'
       # Root namespace for the EF migrations
