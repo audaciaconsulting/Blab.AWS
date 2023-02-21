@@ -28,9 +28,7 @@ inputs:
 
 runs:
   using: "composite"
-  steps:
-  - name: convert artifact to .zip
-  
+  steps:  
   - name: Deploy to Elastic BeanStalk
     uses: einaregilsson/beanstalk-deploy@v21
     with:
