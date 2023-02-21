@@ -32,9 +32,11 @@ runs:
   - name: Deploy to Elastic BeanStalk
     uses: einaregilsson/beanstalk-deploy@v21
     with:
+      existing_bucket_name: ${{ inputs.application-name }}
       aws_access_key: ${{ inputs.aws-access-key-id }} # stored in secrets section of the Github repo
       aws_secret_key: ${{ inputs.aws-access-key-secret }} # stored in secrets section of the Github repo
       application_name: ${{ inputs.application-name }}
       environment_name: ${{ inputs.environment-name }}
       region: ${{ inputs.region }}
+      version_label: 1
       deployment_package: ${{ inputs.deployment-package }} # this is the name of the artifact directory, this may need to be a .zip - https://github.com/einaregilsson/beanstalk-deploy
