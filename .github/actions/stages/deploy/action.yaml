@@ -79,7 +79,7 @@ runs:
       path: 'blab-ui'
       
   - name: 'Deploy Api'
-    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy
+    uses: ./.github/actions/deployment/aws/elastic-beanstalk
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
@@ -88,7 +88,7 @@ runs:
       deployment-package: 'blab-api'
 
   - name: 'Deploy Identity'
-    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
+    uses: ./.github/actions/deployment/aws/elastic-beanstalk
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
