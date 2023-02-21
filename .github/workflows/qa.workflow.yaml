@@ -165,24 +165,29 @@ jobs:
 
     - name: Upload Identity Artifact
       id: upload-identity-artifact
-      uses: ./.github/actions/build/common/artifacts/tasks/upload
-      with:  
-        artifact-name: blab.identity
-        paths: blab.identity
+      uses: actions/upload-artifact@v3
+      with:
+        name: blab.identity
+        path: blab.identity
 
     - name: Upload Api Artifact
       id: upload-api-artifact
-      uses: ./.github/actions/build/common/artifacts/tasks/upload
-      with:  
-        artifact-name: blab.api
-        paths: blab.api
+      uses: actions/upload-artifact@v3
+      with:
+        name: blab.api
+        path: blab.api
 
     - name: Upload Ui Artifact
       id: upload-ui-artifact
-      uses: ./.github/actions/build/common/artifacts/tasks/upload
-      with:  
-        artifact-name: blab.ui
-        paths: blab.ui
+      uses: actions/upload-artifact@v3
+      with:
+        name: blab.ui
+        path: blab.ui
+        
+      # uses: ./.github/actions/build/common/artifacts/tasks/upload
+      # with:  
+      #   artifact-name: blab.ui
+      #   paths: blab.ui
 
     # - uses: ./.github/actions/build/common/artifacts/tasks/upload
     #   with:  

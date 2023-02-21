@@ -27,8 +27,7 @@ builder.Services.AddConfigOptions(builder.Configuration)
     .ConfigureHealthChecks()
     .AddExceptionHandlingServices()
     .AddControllersWithViews()
-    .ConfigureOpenIddict<ApplicationUser, int>()
-    ;
+    .ConfigureOpenIddict<ApplicationUser, int>();
 
 builder.Services.AddCorsServices(builder.Configuration).AddAuthentication();
 
