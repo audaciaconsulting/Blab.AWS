@@ -163,17 +163,20 @@ jobs:
         uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
         authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
 
-    - uses: ./.github/actions/build/common/artifacts/tasks/upload
+    - name: Upload Identity Artifact
+      uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.identity
         paths: blab.identity
 
-    - uses: ./.github/actions/build/common/artifacts/tasks/upload
+    - name: Upload Api Artifact
+      uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.api
         paths: blab.api
 
-    - uses: ./.github/actions/build/common/artifacts/tasks/upload
+    - name: Upload Ui Artifact
+      uses: ./.github/actions/build/common/artifacts/tasks/upload
       with:  
         artifact-name: blab.ui
         paths: blab.ui
@@ -189,3 +192,6 @@ jobs:
         aws-access-key-secret: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
         environment-name: 'Quality Assurance'
         environment-id: 'qa'
+        api-artifact-path: ${{ steps.upload-api-artifact.outputs.artifact_path }}
+        identity-artifact-path: ${{ steps.upload-identity-artifact.outputs.artifact_path }}
+        ui-artifact-path: ${{ steps.upload-ui-artifact.outputs.artifact_path }}

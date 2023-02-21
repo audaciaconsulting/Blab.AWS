@@ -14,6 +14,15 @@ inputs:
   environment-id: # Id of the environment e.g. 'qa' or 'uat'
     required: true
     type: string
+  ui-artifact-path:
+    required: true
+    type: string
+  api-artifact-path:
+    required: true
+    type: string
+  identity-artifact-path:
+    required: true
+    type: string
 
 runs:
   using: "composite"
@@ -76,7 +85,8 @@ runs:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
       application-name: 'blab-ui'
-      paths: 'blab-ui'
+      bucket-name: 'blab-ui'
+      paths: ${{ inputs.ui-artifact-path }}
       
   - name: 'Deploy Api'
     uses: ./.github/actions/deployment/aws/elastic-beanstalk
@@ -85,7 +95,7 @@ runs:
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
       application-name: 'Blab.Api'
       environment-name: ${{ inputs.environment-name }}
-      deployment-package: 'blab-api'
+      deployment-package: ${{ inputs.api-artifact-path }}
 
   - name: 'Deploy Identity'
     uses: ./.github/actions/deployment/aws/elastic-beanstalk
@@ -94,4 +104,4 @@ runs:
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
       application-name: 'Blab.Identity'
       environment-name: ${{ inputs.environment-name }}
-      deployment-package: 'blab-identity'
+      deployment-package: ${{ inputs.identity-artifact-path }}
