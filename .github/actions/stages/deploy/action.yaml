@@ -42,6 +42,7 @@ runs:
   - name: 'Apply EF Core migrations - OpenIddictDbContext'
     shell: bash
     run: dotnet ef database -c OpenIddictDbContext -p Blab.DataAccess -s Blab.Identity
+
     # uses: benday-inc/deploy-ef-core-migration@v1.1
     # with:
     #   # Path to directory that contains all the files
@@ -70,7 +71,7 @@ runs:
   #     dbcontext_class_name: 'OpenIddictDbContext'
 
   - name: 'Deploy Web'
-    uses: ./.github/actions/deployment/aws/s3-bucket/deploy@template
+    uses: ./.github/actions/deployment/aws/s3-bucket/deploy
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
@@ -78,7 +79,7 @@ runs:
       path: 'blab-ui'
       
   - name: 'Deploy Api'
-    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy@template
+    uses: ./.github/actions/deployment/aws/elastic-beanstalk/deploy
     with:
       aws-access-key-id: ${{ inputs.aws-access-key-id }}
       aws-access-key-secret: ${{ inputs.aws-access-key-secret }}
