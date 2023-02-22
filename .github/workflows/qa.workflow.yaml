@@ -97,116 +97,116 @@ jobs:
     #     nuget-feed-source: ${{ vars.NUGET_FEED_SOURCE }}
     #     azure-devops-token: '${{ vars.AZURE_DEVOPS_TOKEN }}'
     
-  deploy-qa:
-    needs: [build-api, build-identity, build-ui]
-    runs-on: windows-latest
-    environment: qa
+  # deploy-qa:
+  #   needs: [build-api, build-identity, build-ui]
+  #   runs-on: windows-latest
+  #   environment: qa
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Download Api
-      uses: actions/download-artifact@v3
-      with:
-        name: 'blab.api'
-        path: 'blab.api'
-    - name: Download Identity
-      uses: actions/download-artifact@v3
-      with:
-        name: blab.identity
-        path: blab.identity
-    - name: Download UI
-      uses: actions/download-artifact@v3
-      with:
-        name: blab.ui
-        path: blab.ui
+  #   steps:
+  #   - uses: actions/checkout@v3
+  #   - name: Download Api
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: 'blab.api'
+  #       path: 'blab.api'
+  #   - name: Download Identity
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: blab.identity
+  #       path: blab.identity
+  #   - name: Download UI
+  #     uses: actions/download-artifact@v3
+  #     with:
+  #       name: blab.ui
+  #       path: blab.ui
 
 
-    # variable sub for app settings
-    - name: 'App Settings Variable Substitution'
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: '**/appsettings.json'
-      env:
-        ApplicationInsights.InstrumentationKey: ${{ vars.APP_SETTINGS_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }}
-        AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
-        AuthenticationConfig.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
-        ApplicationInsights.TestAutomationClient.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_ID }}
-        ApplicationInsights.TestAutomationClient.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_SECRET }}
-        Azure.BlobStorageConfig.AccountKey: ${{ secrets.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_KEY }}
-        Azure.BlobStorageConfig.AccountName: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_NAME }}
-        Azure.BlobStorageConfig.ContainerUrl: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_CONTAINER_URL }}
-        ConnectionStrings.BlabDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_BLAB_DB_CONTEX }}
-        ConnectionStrings.OpenIddictDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_OPENIDDICT_DB_CONTEXT }}
-        EndpointConfig.Api: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_API }}
-        EndpointConfig.Identity: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_IDENTITY }}
-        EndpointConfig.Ui: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_UI }}
-        OpenIdConnectConfig.AuthorizationCodeClients.0.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_BASE_URL }}
-        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_0 }}
-        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_1 }}
-        OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.2: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_2 }}
-        OpenIdConnectConfig.AuthorizationCodeClients.1.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_BASE_URL }}
-        OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_0 }}
-        OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_1 }}
-        OpenIdConnectConfig.ClientCredentialsClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_CLIENT_CREDENTIALS_CLIENTS_0_CLIENT_SECRET }}
-        OpenIdConnectConfig.ResourceOwnerPasswordClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_RESOURCE_OWNER_PASSWORD_CLIENTS_0_CLIENT_SECRET }}
-        OpenIdConnectConfig.EncryptionCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_ENCRYPTION_CERTIFICATE_THUMBPRINT }}
-        OpenIdConnectConfig.SigningCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_SIGNING_CERTIFICATE_THUMBPRINT }}
+  #   # variable sub for app settings
+  #   - name: 'App Settings Variable Substitution'
+  #     uses: microsoft/variable-substitution@v1
+  #     with:
+  #       files: '**/appsettings.json'
+  #     env:
+  #       ApplicationInsights.InstrumentationKey: ${{ vars.APP_SETTINGS_APPLICATION_INSIGHTS_INSTRUMENTATION_KEY }}
+  #       AuthenticationConfig.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_ID }}
+  #       AuthenticationConfig.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_CLIENT_SECRET }}
+  #       ApplicationInsights.TestAutomationClient.ClientId: ${{ vars.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_ID }}
+  #       ApplicationInsights.TestAutomationClient.ClientSecret: ${{ secrets.APP_SETTINGS_AUTHENTICATION_CONFIG_TEST_AUTOMATION_CLIENT_CLIENT_SECRET }}
+  #       Azure.BlobStorageConfig.AccountKey: ${{ secrets.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_KEY }}
+  #       Azure.BlobStorageConfig.AccountName: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_ACCOUNT_NAME }}
+  #       Azure.BlobStorageConfig.ContainerUrl: ${{ vars.APP_SETTINGS_AZURE_BLOB_STORAGE_CONFIG_CONTAINER_URL }}
+  #       ConnectionStrings.BlabDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_BLAB_DB_CONTEX }}
+  #       ConnectionStrings.OpenIddictDbContext: ${{ secrets.APP_SETTINGS_CONNECTION_STRINGS_OPENIDDICT_DB_CONTEXT }}
+  #       EndpointConfig.Api: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_API }}
+  #       EndpointConfig.Identity: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_IDENTITY }}
+  #       EndpointConfig.Ui: ${{ vars.APP_SETTINGS_ENDPOINT_CONFIG_UI }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.0.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_BASE_URL }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_0 }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_1 }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.0.RedirectUris.2: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_0_REDIRECT_URIS_2 }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.1.BaseUrl: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_BASE_URL }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.0: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_0 }}
+  #       OpenIdConnectConfig.AuthorizationCodeClients.1.RedirectUris.1: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_AUTHORIZATION_CODE_CLIENTS_1_REDIRECT_URIS_1 }}
+  #       OpenIdConnectConfig.ClientCredentialsClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_CLIENT_CREDENTIALS_CLIENTS_0_CLIENT_SECRET }}
+  #       OpenIdConnectConfig.ResourceOwnerPasswordClients.0.ClientSecret: ${{ secrets.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_RESOURCE_OWNER_PASSWORD_CLIENTS_0_CLIENT_SECRET }}
+  #       OpenIdConnectConfig.EncryptionCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_ENCRYPTION_CERTIFICATE_THUMBPRINT }}
+  #       OpenIdConnectConfig.SigningCertificateThumbprint: ${{ vars.APP_SETTINGS_OPENIDDICT_CONNECT_CONFIG_SIGNING_CERTIFICATE_THUMBPRINT }}
 
-      # variable sub for app settings
-    - name: 'Ui config Variable Substitution'
-      uses: microsoft/variable-substitution@v1
-      with:
-        files: '**/blab.ui/**/config.json'
-      env:
-        apiUrl: ${{ vars.UI_CONFIG_API_BASE_URL }}
-        identityUrl: ${{ vars.UI_CONFIG_IDENTITY_URL }}
-        uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
-        authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
+  #     # variable sub for app settings
+  #   - name: 'Ui config Variable Substitution'
+  #     uses: microsoft/variable-substitution@v1
+  #     with:
+  #       files: '**/blab.ui/**/config.json'
+  #     env:
+  #       apiUrl: ${{ vars.UI_CONFIG_API_BASE_URL }}
+  #       identityUrl: ${{ vars.UI_CONFIG_IDENTITY_URL }}
+  #       uiUrl: ${{ vars.UI_CONFIG_UI_URL }}
+  #       authTokenLocation: ${{ vars.VITE_AUTH_TOKEN_LOCATION }}
 
-    - name: Upload Identity Artifact
-      id: upload-identity-artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: blab.identity
-        path: blab.identity
+  #   - name: Upload Identity Artifact
+  #     id: upload-identity-artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: blab.identity
+  #       path: blab.identity
 
-    - name: Upload Api Artifact
-      id: upload-api-artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: blab.api
-        path: blab.api
+  #   - name: Upload Api Artifact
+  #     id: upload-api-artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: blab.api
+  #       path: blab.api
 
-    - name: Upload Ui Artifact
-      id: upload-ui-artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: blab.ui
-        path: blab.ui
+  #   - name: Upload Ui Artifact
+  #     id: upload-ui-artifact
+  #     uses: actions/upload-artifact@v3
+  #     with:
+  #       name: blab.ui
+  #       path: blab.ui
 
-      # uses: ./.github/actions/build/common/artifacts/tasks/upload
-      # with:  
-      #   artifact-name: blab.ui
-      #   paths: blab.ui
+  #     # uses: ./.github/actions/build/common/artifacts/tasks/upload
+  #     # with:  
+  #     #   artifact-name: blab.ui
+  #     #   paths: blab.ui
 
-    # - uses: ./.github/actions/build/common/artifacts/tasks/upload
-    #   with:  
-    #     artifact-name: blab.api
-    #     paths: blab.api
+  #   # - uses: ./.github/actions/build/common/artifacts/tasks/upload
+  #   #   with:  
+  #   #     artifact-name: blab.api
+  #   #     paths: blab.api
 
-    - name: show artifact outputs
-      shell: bash
-      run: |
-        echo "The api artifact path is ${{ steps.upload-api-artifact.outputs }}"
-        echo "The identity artifact path is ${{ steps.upload-identity-artifact.outputs }}"
-        echo "The ui artifact path is ${{ steps.upload-ui-artifact.outputs }}"
+  #   - name: show artifact outputs
+  #     shell: bash
+  #     run: |
+  #       echo "The api artifact path is ${{ steps.upload-api-artifact.outputs }}"
+  #       echo "The identity artifact path is ${{ steps.upload-identity-artifact.outputs }}"
+  #       echo "The ui artifact path is ${{ steps.upload-ui-artifact.outputs }}"
 
-    - uses: ./.github/actions/stages/deploy
-      with:
-        aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
-        aws-access-key-secret: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
-        environment-name: 'Quality Assurance'
-        environment-id: 'qa'
-        api-artifact-path: ${{ steps.upload-api-artifact.outputs.artifact_path }}
-        identity-artifact-path: ${{ steps.upload-identity-artifact.outputs.artifact_path }}
-        ui-artifact-path: ${{ steps.upload-ui-artifact.outputs.artifact_path }}
+  #   - uses: ./.github/actions/stages/deploy
+  #     with:
+  #       aws-access-key-id: ${{ vars.AWS_ACCESS_KEY_ID }}
+  #       aws-access-key-secret: ${{ secrets.AWS_ACCESS_KEY_SECRET }}
+  #       environment-name: 'Quality Assurance'
+  #       environment-id: 'qa'
+  #       api-artifact-path: ${{ steps.upload-api-artifact.outputs.artifact_path }}
+  #       identity-artifact-path: ${{ steps.upload-identity-artifact.outputs.artifact_path }}
+  #       ui-artifact-path: ${{ steps.upload-ui-artifact.outputs.artifact_path }}
